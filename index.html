@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aurora Runas</title>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 10px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #fdfcfd;  
+            text-align: center; 
+            color: white; 
+            overflow-x: hidden;
+        }
+
+/* --- LOADER DE ABERTURA --- */
+ #pageLoader {
+  position: fixed;
+  inset: 0;
+  background: #9d5fe9;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🔮 CÍRCULO QUE GIRA */
+.loader-circle {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(255,255,255,0.3);
+  border-top: 6px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+
+ /* Container Principal */
+        .menu-caixa { 
+             background: rgba(221, 214, 214, 0.9);
+             backdrop-filter: blur(6px);
+            color: #333; 
+            padding: 10px; 
+            border-radius: 20px; 
+            max-width: 320px; 
+            margin: 15px auto; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
+        }
+
+        /* Botões */
+        .btn-aurora { 
+            width: 90%; 
+            padding: 12px; 
+            margin: 6px 0; 
+            border: none; 
+            border-radius: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            color: white; 
+            font-size: 16px; 
+            transition: 0.3s ease; 
+        }
+        .btn-aurora:active { transform: scale(0.95); }
+        .rosa { background: #d81b60; }
+        .roxo { background: #9B4FAD; }
+        .rosa-claro { background: #ff80ab !important; } 
+        .verde-agua { background: #20b2aa; }
+        .verde.claro { background: #2ecc71; }
+
+ /* Área de Jogo */
+        
+.cards-area { 
+  display: none; 
+  justify-content: center; 
+  gap: 8px; 
+  margin: 12px 0; 
+  padding: 12px;
+
+  /* 🎯 FUNDO + SHAPE */
+ background: rgba(221, 214, 214, 0.9);
+backdrop-filter: blur(6px);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  flex-wrap: wrap; 
+  border: 1px solid 7776a;
+}
+
+/* Cartas */
+.card { 
+  width: 100px;
+  height: 170px;
+  background: #311b92;
+  border-radius: 10px;
+  border: 2px solid #eee;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Imagem da carta */
+.card img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  transition: opacity 0.3s; 
+}
+
+/* textos gerados abaixo das cartas após IA  */
+ #status { 
+    margin: 10px 0; 
+    font-size: 18px; 
+    font-style: normal; 
+    color: #1c171c; 
+    min-height: 20px; }
+
+        /* Caixa de Resposta da IA e Estilo do Botão Redondo */
+        #aiBox { 
+            display: none; background: white; color: #333; padding: 18px; 
+            border-radius: 15px; text-align: left; margin-top: 15px; 
+            font-size: 15px; line-height: 1.6; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .btn-zap-redondo {
+            position: absolute; top: 10px; right: 10px; width: 45px; height: 45px;
+            cursor: pointer; transition: transform 0.2s;
+        }
+        .btn-zap-redondo:hover { transform: scale(1.1); }
+
+        .ai-logo { width: 40px; vertical-align: middle; margin-right: 8px;  border-radius: 50%;
+  object-fit: cover;bbox-shadow: 0 4px 10px rgba(0,0,0,0.15); background: cinza; }
+        
+  .ai-title { font-size: 16px; color: #4a148c; margin-top: 0; padding-right: 50px; text-align: center; }
+
+ /* Loader de Análise */
+        #loader { display: none; margin: 20px auto; border: 4px solid #f3f3f3; border-top: 4px solid #7b1fa2; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body onload="document.getElementById('pageLoader').style.display='none';">
+
+    <div id="pageLoader">
+  <div class="loader-circle"></div>
+</div>
+
+     /* área dos botões e da imagem */
+    
+<div id="menuInicial" class="menu-caixa" style="
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+">
+
+<div style="
+  padding: 4px;
+  border-radius: 14px;
+  background: transparent;
+">
+  <img 
+    src="images_runas/runas_abertura.png"
+    class="runa-girando"
+    style="
+      width: 135px;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+    "
+  >
+</div>
+
+<style>
+  .runa-girando {
+    animation: girarRuna 12s linear infinite;
+  }
+
+  @keyframes girarRuna {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+
+  <p style="
+    color:#666;
+    margin-top: 4px;
+    font-weight: bold;
+    font-size: 19px;
+    text-align: center;
+  ">
+    Escolha sua consulta...
+  </p>
+
+  <div style="display: flex; gap: 8px; margin-top: 4px;">
+    <button onclick="iniciar(1)" class="btn-aurora rosa">
+      1 Runa
+    </button>
+
+    <button onclick="iniciar(3)" class="btn-aurora roxo">
+      3 Runas
+    </button>
+  </div>
+</div>
+    
+    <div id="jogoArea" style="display:none;">
+        <div class="cards-area" id="containerRunas"></div>
+        <button id="btnSorteio" class="btn-aurora roxo" onclick="sortear()">🔮 Lançar Runas</button>
+        <div id="status">Mentalize a situação que deseja compreender...</div>
+        
+        <div id="loader"></div>
+
+        <div id="aiBox">
+            <img src="images_runas/zap.png" class="btn-zap-redondo" onclick="shareOnWhatsApp()" title="Compartilhar">
+            <div id="conteudoIA"></div>
+            
+            <button onclick="location.reload()" class="btn-aurora verde claro" style="margin-top:-10px;">Nova Consulta</button>
+
+            <div id="ad-container" style="margin-top: 20px;">
+            <span style="font-size: 10px; color: #999; margin-bottom: 5px;">Publicidade</span>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3940256099942544"
+                     data-ad-slot="6300978111"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+    </div>
+
+
+  <script>
+    const somSorteio = new Audio('audio_app/slots_machine.mp3');
+    const somAnalise = new Audio('audio_app/ghost.mp3');
+
+    // Monitor para comandos de som do App Inventor
+    setInterval(function() {
+        if (window.AppInventor) {
+            let comando = window.AppInventor.getWebViewString();
+            if (comando === "PARAR") {
+                if (window.somAnalise) {
+                    window.somAnalise.pause();
+                    window.somAnalise.currentTime = 0;
+                }
+                window.AppInventor.setWebViewString("");
+            }
+        }
+    }, 500);
+
+    const runas = [
+        "Algiz","Ansuz","Berkano","Dagaz","Ehwaz","Eihwaz","Fehu","Gebo",
+        "Hagalaz","Ingwaz","Isa","Jera","Kenaz","Laguz","Mannaz","Nauthiz",
+        "Othala","Perthro","Raidho","Sowilo","Thurisaz","Tiwaz","Uruz","Wunjo"
+    ];
+
+    const path = "images_runas/";
+    let modoGlobal = 0;
+    let selecionadas = [];
+
+    function iniciar(qtd) {
+        modoGlobal = qtd;
+        document.getElementById('menuInicial').style.display = 'none';
+        document.getElementById('jogoArea').style.display = 'block';
+
+        const container = document.getElementById('containerRunas');
+        container.style.display = 'flex';
+        container.innerHTML = '';
+
+        for (let i = 1; i <= qtd; i++) {
+            container.innerHTML += `
+                <div class="card">
+                    <img id="r${i}" src="${path}runa_${i}.png" onerror="this.style.opacity='0'">
+                </div>`;
+        }
+    }
+
+    function sortear() {
+        const btn = document.getElementById('btnSorteio');
+        btn.classList.add('rosa-claro');
+        btn.innerText = "⏳ Sorteando suas runas...";
+        btn.disabled = true;
+
+        somSorteio.play().catch(() => {});
+        let voltas = 0;
+
+        let girar = setInterval(() => {
+            for (let i = 1; i <= modoGlobal; i++) {
+                let rAleatoria = runas[Math.floor(Math.random() * runas.length)];
+                let imgEl = document.getElementById('r' + i);
+                if (imgEl) {
+                    imgEl.src = path + rAleatoria + ".png";
+                    imgEl.style.opacity = '1';
+                }
+            }
+            if (++voltas > 30) {
+                clearInterval(girar);
+                finalizarSorteio();
+            }
+        }, 80);
+    }
+
+    function finalizarSorteio() {
+        somSorteio.pause();
+
+        selecionadas = [];
+        for (let i = 1; i <= modoGlobal; i++) {
+            let r = runas[Math.floor(Math.random() * runas.length)];
+            selecionadas.push(r);
+            document.getElementById('r' + i).src = path + r + ".png";
+        }
+        enviarIA();
+    }
+
+    async function enviarIA() {
+        document.getElementById('loader').style.display = 'block';
+        const statusEl = document.getElementById('status');
+        statusEl.innerText = "Processando a leitura das runas...";
+
+        try {
+            const res = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    messages: [{
+                        role: "user",
+                        content: "Você é um mestre rúnico. Interprete: " + selecionadas.join(", ")
+                    }]
+                })
+            });
+
+            const data = await res.json();
+            const textoIA = data.choices[0].message.content;
+
+            // Prepara áudio (libera após interação)
+            somAnalise.play().then(() => {
+                somAnalise.pause();
+                somAnalise.currentTime = 0;
+            }).catch(() => {
+                console.log("Áudio preparado (bloqueado até interação)");
+            });
+
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('btnSorteio').style.display = 'none';
+
+            document.getElementById('conteudoIA').innerHTML = `
+                <h2 class="ai-title">
+                    <img src="images_runas/logo_aurora_github.png" class="ai-logo">
+                    Aurora Runas Assistente de IA
+                </h2>
+                <p>${textoIA.replace(/\n/g, '<br>')}</p>
+            `;
+
+            document.getElementById('aiBox').style.display = 'block';
+            statusEl.innerText = "Conselho revelado.";
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+            document.getElementById('loader').style.display = 'none';
+            statusEl.innerText = "Erro na conexão.";
+        }
+    }
+
+    function novaConsulta() {
+        // Reset do áudio
+        if (somAnalise) {
+            somAnalise.pause();
+            somAnalise.currentTime = 0;
+            somAnalise.load();
+        }
+
+        // Reset da interface
+        document.getElementById('aiBox').style.display = 'none';
+        document.getElementById('jogoArea').style.display = 'none';
+        document.getElementById('menuInicial').style.display = 'flex';
+
+        const btn = document.getElementById('btnSorteio');
+        btn.style.display = 'block';
+        btn.disabled = false;
+        btn.innerText = "🔮 Lançar Runas";
+        btn.classList.remove('rosa-claro');
+
+        document.getElementById('status').innerText =
+            "Mentalize a situação que deseja compreender...";
+
+        selecionadas = [];
+        modoGlobal = 0;
+    }
+
+    function shareOnWhatsApp() {
+        const title = "Aurora Runas Assistente de IA";
+        const analysisText = document.querySelector('#conteudoIA p')?.innerText || '';
+        const footer = "\n\n🔮 Aurora Runas — leitura assistida por IA\n⚡ Powered by Geraldo A. Seabra";
+        const message = `✨ ${title}\n\n${analysisText}${footer}`;
+
+        if (window.AppInventor) {
+            window.AppInventor.setWebViewString(message);
+        } else {
+            window.open(
+                `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`,
+                '_blank'
+            );
+        }
+    }
+</script>
+
