@@ -1,9 +1,4 @@
-// api/index.js
+// /api/index.js
 export default function handler(req, res) {
-	res.json({ 
-	  message: 'API Aurora funcionando!',
-	  endpoints: {
-		chat: '/api/chat'
-	  }
-	});
-  }
+  res.status(200).json({ status: "API Allora viva" })
+}
