@@ -1,0 +1,24 @@
+{
+  "name": "Anora",
+  "short_name": "Allora",
+  "description": "Jogo Duelo de Ideias Sem Paixão com 60 Pensadores da Filosofia",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f7f7f7",
+  "theme_color": "#6b46c1",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
