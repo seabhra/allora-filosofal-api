@@ -1,4 +1,4 @@
-// /api/index.js
+// api/index.js
 export default function handler(req, res) {
-  res.status(200).json({ status: "API Allora viva" })
+  res.status(200).json({ status: "API Allora viva" });
 }
