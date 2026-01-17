@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function Home() {
-  return React.createElement("div", null, "Allora Filosofal API");
+  return <div>Allora Filosofal API</div>;
 }
