@@ -1,1 +1,3 @@
-export default function handler(req, res) { res.status(200).json({ message: 'OK' }); }
+export default function Home() {
+  return React.createElement("div", null, "Allora Filosofal API");
+}
