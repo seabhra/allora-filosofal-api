@@ -1,9 +1,1 @@
-// api/index.js
-export default function handler(req, res) {
-	res.json({ 
-	  message: 'API Aurora funcionando!',
-	  endpoints: {
-		chat: '/api/chat'
-	  }
-	});
-  }
+export default function handler(req, res) { res.status(200).json({ message: 'OK' }); }
