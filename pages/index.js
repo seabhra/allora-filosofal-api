@@ -1,1 +1,3 @@
-export default function Home() { return 'Allora Filosofal API'; }
+export default function Home() {
+  return React.createElement("div", null, "Allora Filosofal API");
+}
