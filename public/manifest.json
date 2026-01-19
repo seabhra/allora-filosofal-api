@@ -1,23 +1,11 @@
+{
+  "name": "Allora - Duelo de Ideias",
+  "short_name": "Allora",
+  "icons": [
     {
-      "name": "Allora - Duelo de Ideias",
-      "short_name": "Allora",
-      "description": "Assistente de confrontação de ideias de pensadores históricos sobre temas atuais",
-      "start_url": "/",
-      "display": "standalone",
-      "background_color": "#6b46c1",
-      "theme_color": "#6b46c1",
-      "orientation": "portrait",
-      "icons": [
-        {
-          "src": "/icons/icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        },
-        {
-          "src": "/icons/icon-512.png",
-          "sizes": "512x512",
-          "type": "image/png"
-        }
-      ]
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
     }
-    
+  ]
+}
