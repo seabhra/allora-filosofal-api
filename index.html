@@ -14,7 +14,9 @@
 
 <!-- Ícones PWA -->
 <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png">
+
 <link rel="manifest" href="/manifest.json">
+
 <meta name="theme-color" content="#6b46c1">
 
     <title>Allora - Duelo de Ideias Sem Paixão</title>
@@ -201,7 +203,7 @@
     </div>
 
     <script>
-        const filosofosLunares = ["Abert-Camus.png", "Adorno.png", "Benjamin.png", "Byung-Chul-Han.png", "Carl-Jung.png", "Emil-Cioran.png", "Fernando-Pessoa.png", "Foucault.png", "Freud.png", "Georges-Bataille.png", "Gilles-Deleuze.png", "Guy-Debord.png", "Hannah-Arendt.png", "Heidegger.png", "Heraclito.png", "Huizinga.png", "Hume.png", "Jacques Derrida.png", "John-Gray.png", "Kierkegaard.png", "Lucrecio.png", "Ludwig-Wittgenstein.png", "Nietzsche.png", "Pascal.png", "Peter-Zapfee.png", "Santo-Agostinho.png", "Sartre.png", "Schopenhauer.png", "Unamuno.png", "Vilém-Flusser.png"];
+        const filosofosLunares = ["Albert-Camus.png", "Adorno.png", "Benjamin.png", "Byung-Chul-Han.png", "Carl-Jung.png", "Emil-Cioran.png", "Fernando-Pessoa.png", "Foucault.png", "Freud.png", "Georges-Bataille.png", "Gilles-Deleuze.png", "Guy-Debord.png", "Hannah-Arendt.png", "Heidegger.png", "Heraclito.png", "Huizinga.png", "Hume.png", "Jacques-Derrida.png", "John-Gray.png", "Kierkegaard.png", "Lucrecio.png", "Ludwig-Wittgenstein.png", "Nietzsche.png", "Pascal.png", "Peter-Zapfee.png", "Santo-Agostinho.png", "Sartre.png", "Schopenhauer.png", "Unamuno.png", "Vilém-Flusser.png"];
         const filosofosSolares = ["Aristoteles.png", "Bernard Suits.png", "Bostrom.png", "Buno Latour.png", "Cicero.png", "Comte.png", "Descartes.png", "Durkheim.png", "Francis Bacon.png", "Habermas.png", "Harari.png", "Hegel.png", "John Nash.png", "Kant.png", "Leibniz.png", "Locke.png", "Marx.png", "Mill.png", "Montesquieu.png", "Pitagoras.png", "Platao.png", "Roger Caillois.png", "Rousseau.png", "Sloterdijk.png", "Socrates.png", "Spinoza.png", "Steve Bannon.png", "Thomas Schelling.png", "Tomas de Aquino.png", "Weber.png"];
 
         let lunarSorteado = "";
@@ -259,45 +261,58 @@
             }, 90);
         }
 
+        // Área da API da IA
+
+
         async function gerarConfrontoIA() {
-            const statusEl = document.getElementById('status');
-            const tema = document.getElementById('seletorTema').value || "Existência";
-            statusEl.innerText = "Aguarde... Os filósofos estão debatendo.";
+        const statusEl = document.getElementById('status');
+        const tema = document.getElementById('seletorTema').value || "Existência";
+        statusEl.innerText = "Aguarde... Os filósofos estão debatendo.";
 
-            try {
-                const res = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        messages: [{
-                            role: "user",
-                            content: `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`
-                        }]
-                    })
-                });
+        try {
+            // Chamada para a API local
+            fetch('http://localhost:3001/api/chat')
+              .then(response => response.json())
+              .then(data => console.log(data));
 
-                const data = await res.json();
-                const textoIA = data.choices[0].message.content;
+            // Chamada real para gerar o confronto (substitua a URL se necessário)
+            const res = await fetch('http://localhost:3001/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    messages: [{
+                        role: "user",
+                        content: `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`
+                    }]
+                })
+            });
 
-                document.getElementById('conteudoIA').innerHTML = `
-                    <h3 style="color:#4a148c; text-align:center">⚔️ ${lunarSorteado} vs ${solarSorteado}</h3>
-                    <p style="font-size:13px; color:#666"><strong>Tema:</strong> ${tema}</p>
-                    <hr>
-                    <p>${textoIA.replace(/\n/g, '<br>')}</p>
-                `;
-                document.getElementById('aiBox').style.display = 'block';
-                statusEl.innerText = "O debate foi concluído.";
+            const data = await res.json();
+            const textoIA = data.choices ? data.choices[0].message.content : JSON.stringify(data);
 
-                // MUDANÇA: Botão VERDE de Novo Duelo ao final
-                const areaBotao = document.getElementById('areaBotaoAcao');
-                areaBotao.innerHTML = `<button onclick="location.reload()" class="btn-aurora verde">♻️ Novo Duelo entre Pensadores</button>`;
+            document.getElementById('conteudoIA').innerHTML = `
+                <h3 style="color:#4a148c; text-align:center">⚔️ ${lunarSorteado} vs ${solarSorteado}</h3>
+                <p style="font-size:13px; color:#666"><strong>Tema:</strong> ${tema}</p>
+                <hr>
+                <p>${textoIA.replace(/\n/g, '<br>')}</p>
+            `;
+            document.getElementById('aiBox').style.display = 'block';
+            statusEl.innerText = "O debate foi concluído.";
 
-            } catch (e) {
-                statusEl.innerText = "Erro na conexão.";
-                // Caso dê erro, também permite reiniciar
-                document.getElementById('areaBotaoAcao').innerHTML = `<button onclick="location.reload()" class="btn-aurora verde">♻️ Tentar Novamente</button>`;
-            }
+            // Botão VERDE de Novo Duelo ao final
+            const areaBotao = document.getElementById('areaBotaoAcao');
+            areaBotao.innerHTML = `<button onclick="location.reload()" class="btn-aurora verde">♻️ Novo Duelo entre Pensadores</button>`;
+
+        } catch (e) {
+            statusEl.innerText = "Erro na conexão com a API: " + e.message;
+            // Caso dê erro, também permite reiniciar
+            document.getElementById('areaBotaoAcao').innerHTML = `<button onclick="location.reload()" class="btn-aurora verde">♻️ Novo Duelo entre Pensadores</button>`;
+            console.error("Erro ao chamar a API:", e);
         }
+    }
+
+// FUNÇÃO DO WHATSAPP
+
 
         function shareOnWhatsApp() {
             const texto = document.querySelector('#conteudoIA').innerText;
