@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,16 +10,14 @@
     crossorigin="anonymous"></script>
 
     <!-- Favicon -->
-<link rel="icon" href="/favicon.ico" type="image/x-icon">  
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
 <!-- Ícones PWA -->
 <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#6b46c1">
 
-
-
-
-    <title>Allora - Duelo de Ideias Sem Viés Passional</title>
+    <title>Allora - Duelo de Ideias Sem Paixão</title>
     <style>
         * { box-sizing: border-box; }
 
@@ -189,7 +189,7 @@
         </div>
         
         <div id="areaBotaoAcao">
-            <button id="btnSorteio" class="btn-aurora rosa" onclick="sortear()">🃏Jogue com Influenciadores da Alta Narrativa</button>
+            <button id="btnSorteio" class="btn-aurora rosa" onclick="sortear()">🃏Jogue com Influencers da Alta Narrativa</button>
         </div>
         
         <div id="status">Prepare-se… Começa a grande batalha do pensamento humano sem aquele velho viés passional tão presente nas redes hoje em dia. Chegou a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram — e que você ainda assume como seus. Nunca foram. Jogue sem dó e mate o que está te matando: a mentira intencional por poder político, econômico e religioso.</div>
@@ -304,7 +304,7 @@
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent("🔥 Veja este duelo filosófico:\n\n" + texto)}`, '_blank');
         }
 
-
+        
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js')
@@ -315,10 +315,8 @@
           console.log('ServiceWorker registration failed: ', err);
         });
     });
+}
 
-
-</script>
+    </script>
 </body>
 </html>
-
-
