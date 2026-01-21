@@ -1,11 +1,18 @@
+// api/chat.js
+const express = require('express');
+const cors = require('cors');
 
-export default async function handler(req, res) {
-	if (req.method === 'POST') {
-	  const { pergunta } = req.body;
-	  const resposta = "Resposta da IA para: " + pergunta;
-	  res.status(200).json({ resposta });
-	} else {
-	  res.status(405).json({ error: "Método não permitido" });
-	}
-  }
-  
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.post('/api/chat', (req, res) => {
+  const { pergunta } = req.body;
+  const resposta = `Resposta da IA para: ${pergunta}`;
+  res.json({ resposta });
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
