@@ -1,16 +1,32 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const app = express();
 
-// Habilita o CORS para todas as rotas
+// Habilita o CORS
 app.use(cors());
 
-// Suas rotas aqui...
-app.get('/api/chat', (req, res) => {
-    res.json({ message: "API funcionando!" });
+// Serve arquivos estáticos da pasta public
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Suas rotas de API
+app.post('/api/chat', (req, res) => {
+    res.json({
+        choices: [{
+            message: {
+                content: "Resposta da API: Duelo entre filósofos sobre o tema..."
+            }
+        }]
+    });
+});
+
+// Rota para servir o index.html em requisições para a raiz
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Inicia o servidor
-app.listen(3001, () => {
-    console.log('Servidor rodando na porta 3001');
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
