@@ -246,8 +246,8 @@
                 const tempL = filosofosLunares[Math.floor(Math.random() * filosofosLunares.length)];
                 const tempS = filosofosSolares[Math.floor(Math.random() * filosofosSolares.length)];
                 
-                document.getElementById('fotoLunar').src = "imagens_lunares_png/" + tempL;
-                document.getElementById('fotoSolar').src = "imagens_solares_png/" + tempS;
+                document.getElementById('fotoLunar').src = "imagens_app/imagens_lunares_png/" + tempL;
+                document.getElementById('fotoSolar').src = "imagens_app/imagens_solares_png/" + tempS;
                 
                 document.getElementById('nomeLunar').innerText = tempL.replace('.png', '').replace(/-/g, ' ');
                 document.getElementById('nomeSolar').innerText = tempS.replace('.png', '').replace(/-/g, ' ');
@@ -269,24 +269,30 @@ async function gerarConfrontoIA() {
 
   statusEl.innerText = "Aguarde... Os grandes filósofos da história duelam neste momento...";
 
+  //API VERCEL de DESENVOLVIMENTO
+
+  const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:3001' : 'https://api-allora-filosofal.vercel.app';
+
   try {
-    const res = await fetch('https://api-allora-filosofal.vercel.app/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        pergunta: `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`
-      })
-    });
+  const res = await fetch(`${API_URL}/api/chat`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      pergunta: `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`
+    })
+  });
+
 
     if (!res.ok) {
       throw new Error(`API respondeu ${res.status}`);
     }
-
     const data = await res.json();
 
     if (!data.resposta) {
       throw new Error("Resposta inválida da API");
     }
+ 
+       //TEXTO RESPOSTA DA API
 
     document.getElementById('conteudoIA').innerHTML = `
       <h3 style="color:#4a148c; text-align:center">
