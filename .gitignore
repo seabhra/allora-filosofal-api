@@ -1,3 +1,5 @@
 node_modules/
 .next/
 ecossistema allora.docx
+.vercel
+.env*.local

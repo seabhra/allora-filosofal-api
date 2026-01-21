@@ -9,6 +9,11 @@ app.use(cors());
 // Serve arquivos estáticos da pasta public
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Rota para servir o index.html em requisições para a raiz
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // Suas rotas de API
 app.post('/api/chat', (req, res) => {
     res.json({
@@ -20,13 +25,8 @@ app.post('/api/chat', (req, res) => {
     });
 });
 
-// Rota para servir o index.html em requisições para a raiz
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
 // Inicia o servidor
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+app.listen(PORT, ()=> {
     console.log(`Servidor rodando na porta ${PORT}`);
 });

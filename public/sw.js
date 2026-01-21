@@ -1,4 +1,6 @@
-const CACHE_NAME = 'allora-cache-v2'; // Atualizei a versão do cache
+const CACHE_NAME = 'allora-cache-v10';
+
+// Lista de URLs para cache
 const urlsToCache = [
   '/',
   '/index.html',
@@ -10,11 +12,12 @@ const urlsToCache = [
   '/imagens_app/verusX.png',
   '/imagens_app/zap.png',
   '/icons/icon-192.png',
-  // Adicione aqui todos os arquivos estáticos que você quer cachear
+  // Adicione aqui outros arquivos estáticos que você quer cachear
 ];
 
 // Instalação do Service Worker e cache dos arquivos
 self.addEventListener('install', event => {
+  console.log('Service Worker instalado');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
@@ -26,6 +29,7 @@ self.addEventListener('install', event => {
 
 // Ativação do Service Worker e limpeza de caches antigos
 self.addEventListener('activate', event => {
+  console.log('Service Worker ativo');
   event.waitUntil(
     caches.keys().then(keys => {
       return Promise.all(
@@ -54,5 +58,3 @@ self.addEventListener('fetch', event => {
       })
   );
 });
-
-

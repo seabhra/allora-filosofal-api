@@ -160,7 +160,7 @@
 
     <div id="menuInicial" class="menu-caixa">
         <div class="banner-abertura">
-            <img src="/imagens_app/img_versus.png" class="img-versus" alt="Versus">
+            <img src="imagens_app/img_versus.png" class="img-versus" alt="Versus">
         </div>
         <p style="color:#ede4e4; font-weight: bold; margin: 5px 0;">Digite ou selecione um tema:</p>
         <div id="erroTema">⚠️ Por favor, escolha um tema antes de iniciar!</div>
@@ -173,17 +173,17 @@
         <div class="cards-area" id="containerFilosofos">
             <div class="card-container">
                 <div class="card">
-                    <img id="fotoLunar" src="/imagens_app/lunares.png">
+                    <img id="fotoLunar" src="imagens_app/lunares.png">
                     <div class="label-card">Lunares - desconfiam dela</div>
                 </div>
                 <div id="nomeLunar" class="nome-filosofo">Prontos para duelar...</div>
             </div>
             
-            <img src="/imagens_app/verusX.png" class="img-versus-central">
+            <img src="imagens_app/verusX.png" class="img-versus-central">
             
             <div class="card-container">
                 <div class="card">
-                    <img id="fotoSolar" src="/imagens_app/solares.png">
+                    <img id="fotoSolar" src="imagens_app/solares.png">
                     <div class="label-card">Solares - prometem razão</div>
                 </div>
                 <div id="nomeSolar" class="nome-filosofo">Prontos para duelar...</div>
@@ -197,7 +197,7 @@
         <div id="status">Prepara-se... Começa a grande batalha do pensamento humano sem aquele velho viés passional tão presente nas redes hoje em dia. Chegou a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram — e que você ainda assume como seus. Nunca foram. Jogue sem dó e mate o que está te matando: a mentira intencional institucionalizada pelas Big Techs por mais poder político, econômico e religioso. Querem a dominação total!</div>
         
         <div id="aiBox">
-            <img src="/imagens_app/zap.png" class="btn-zap-redondo" onclick="shareOnWhatsApp()">
+            <img src="imagens_app/zap.png" class="btn-zap-redondo" onclick="shareOnWhatsApp()">
             <div id="conteudoIA"></div>
         </div>
     </div>
@@ -246,8 +246,8 @@
                 const tempL = filosofosLunares[Math.floor(Math.random() * filosofosLunares.length)];
                 const tempS = filosofosSolares[Math.floor(Math.random() * filosofosSolares.length)];
                 
-                document.getElementById('fotoLunar').src = "/imagens_lunares_png/" + tempL;
-                document.getElementById('fotoSolar').src = "/imagens_solares_png/" + tempS;
+                document.getElementById('fotoLunar').src = "imagens_lunares_png/" + tempL;
+                document.getElementById('fotoSolar').src = "imagens_solares_png/" + tempS;
                 
                 document.getElementById('nomeLunar').innerText = tempL.replace('.png', '').replace(/-/g, ' ');
                 document.getElementById('nomeSolar').innerText = tempS.replace('.png', '').replace(/-/g, ' ');
@@ -269,24 +269,30 @@ async function gerarConfrontoIA() {
 
   statusEl.innerText = "Aguarde... Os grandes filósofos da história duelam neste momento...";
 
+  //API VERCEL de DESENVOLVIMENTO
+
+  const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:3001' : 'https://api-allora-filosofal.vercel.app';
+
   try {
-    const res = await fetch('https://api-allora-filosofal.vercel.app/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        pergunta: `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`
-      })
-    });
+  const res = await fetch(`${API_URL}/api/chat`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      pergunta: `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`
+    })
+  });
+
 
     if (!res.ok) {
       throw new Error(`API respondeu ${res.status}`);
     }
-
     const data = await res.json();
 
     if (!data.resposta) {
       throw new Error("Resposta inválida da API");
     }
+ 
+       //TEXTO RESPOSTA DA API
 
     document.getElementById('conteudoIA').innerHTML = `
       <h3 style="color:#4a148c; text-align:center">
@@ -326,16 +332,16 @@ async function gerarConfrontoIA() {
         }
 
         
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(registration => {
-          console.log('ServiceWorker registration successful');
-        })
-        .catch(err => {
-          console.log('ServiceWorker registration failed: ', err);
-        });
-    });
+        if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('ServiceWorker registrado com sucesso:', registration.scope);
+      })
+      .catch(err => {
+        console.log('Falha no registro do ServiceWorker:', err);
+      });
+  });
 }
 
     </script>
