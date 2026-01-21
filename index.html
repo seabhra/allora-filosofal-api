@@ -10,12 +10,19 @@
     crossorigin="anonymous"></script>
 
     <!-- Favicon -->
-<!-- Corrija os caminhos para serem relativos -->
-<link rel="icon" href="./favicon.ico" type="image/x-icon">
-<link rel="manifest" href="./manifest.json">
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+<!-- Manifest -->
+<link rel="manifest" href="manifest.json">
 
 <!-- Ícones PWA -->
-<link rel="apple-touch-icon" sizes="192x192" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+
+<!-- Imagens -->
+<img src="imagens_app/img_versus.png" class="img-versus" alt="Versus">
+<img src="imagens_app/lunares.png" class="img-lunares" alt="Lunares">
+<img src="imagens_app/solares.png" class="img-solares" alt="Solares">
 
 
 <meta name="theme-color" content="#6b46c1">
@@ -261,56 +268,62 @@
                 }
             }, 90);
         }
+    
+    
+// CHAMADA DA API VERCEL
 
-        // Área da API da IA
+    async function gerarConfrontoIA() {
+    const statusEl = document.getElementById('status');
+    const tema = document.getElementById('seletorTema').value || "Existência";
+    statusEl.innerText = "Aguarde... Os filósofos estão debatendo.";
 
+    try {
+        // Chamada real para gerar o confronto
+        const res = await fetch('https://api-allora-filosofal.vercel.app/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                messages: [{
+                    role: "user",
+                    content: `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`
+                }]
+            })
+        });
 
-        async function gerarConfrontoIA() {
-        const statusEl = document.getElementById('status');
-        const tema = document.getElementById('seletorTema').value || "Existência";
-        statusEl.innerText = "Aguarde... Os filósofos estão debatendo.";
-
-        try {
-            // Chamada para a API local
-            fetch('http://localhost:3001/api/chat')
-              .then(response => response.json())
-              .then(data => console.log(data));
-
-            // Chamada real para gerar o confronto (substitua a URL se necessário)
-            const res = await fetch('http://localhost:3001/api/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    messages: [{
-                        role: "user",
-                        content: `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`
-                    }]
-                })
-            });
-
-            const data = await res.json();
-            const textoIA = data.choices ? data.choices[0].message.content : JSON.stringify(data);
-
-            document.getElementById('conteudoIA').innerHTML = `
-                <h3 style="color:#4a148c; text-align:center">⚔️ ${lunarSorteado} vs ${solarSorteado}</h3>
-                <p style="font-size:13px; color:#666"><strong>Tema:</strong> ${tema}</p>
-                <hr>
-                <p>${textoIA.replace(/\n/g, '<br>')}</p>
-            `;
-            document.getElementById('aiBox').style.display = 'block';
-            statusEl.innerText = "O debate foi concluído.";
-
-            // Botão VERDE de Novo Duelo ao final
-            const areaBotao = document.getElementById('areaBotaoAcao');
-            areaBotao.innerHTML = `<button onclick="location.reload()" class="btn-aurora verde">♻️ Novo Duelo entre Pensadores</button>`;
-
-        } catch (e) {
-            statusEl.innerText = "Erro na conexão com a API: " + e.message;
-            // Caso dê erro, também permite reiniciar
-            document.getElementById('areaBotaoAcao').innerHTML = `<button onclick="location.reload()" class="btn-aurora verde">♻️ Novo Duelo entre Pensadores</button>`;
-            console.error("Erro ao chamar a API:", e);
+        if (!res.ok) {
+            throw new Error(`Erro na API: ${res.status} ${res.statusText}`);
         }
+
+        const data = await res.json();
+
+        // Verifique se a resposta tem o formato esperado
+        let textoIA;
+        if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+            textoIA = data.choices[0].message.content;
+        } else {
+            textoIA = "Resposta inesperada da API: " + JSON.stringify(data);
+        }
+
+        document.getElementById('conteudoIA').innerHTML = `
+            <h3 style="color:#4a148c; text-align:center">⚔️ ${lunarSorteado} vs ${solarSorteado}</h3>
+            <p style="font-size:13px; color:#666"><strong>Tema:</strong> ${tema}</p>
+            <hr>
+            <p>${textoIA.replace(/\n/g, '<br>')}</p>
+        `;
+        document.getElementById('aiBox').style.display = 'block';
+        statusEl.innerText = "O debate foi concluído.";
+
+        // Botão VERDE de Novo Duelo ao final
+        const areaBotao = document.getElementById('areaBotaoAcao');
+        areaBotao.innerHTML = `<button onclick="location.reload()" class="btn-aurora verde">♻️ Novo Duelo entre Pensadores</button>`;
+
+    } catch (e) {
+        statusEl.innerText = "Erro na conexão com a API: " + e.message;
+        // Caso dê erro, também permite reiniciar
+        document.getElementById('areaBotaoAcao').innerHTML = `<button onclick="location.reload()" class="btn-aurora verde">♻️ Novo Duelo entre Pensadores</button>`;
+        console.error("Erro ao chamar a API:", e);
     }
+}
 
 // FUNÇÃO DO WHATSAPP
 
@@ -320,18 +333,18 @@
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent("🔥 Veja este duelo filosófico:\n\n" + texto)}`, '_blank');
         }
 
-        
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(registration => {
-          console.log('ServiceWorker registration successful');
-        })
-        .catch(err => {
-          console.log('ServiceWorker registration failed: ', err);
-        });
-    });
+        if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('ServiceWorker registrado com sucesso:', registration.scope);
+      })
+      .catch(err => {
+        console.log('Falha no registro do ServiceWorker:', err);
+      });
+  });
 }
+
 
     </script>
 </body>
