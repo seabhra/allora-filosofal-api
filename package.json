@@ -12,5 +12,19 @@
     "next": "latest",
     "react": "18",
     "react-dom": "18"
-  }
+  },
+  "description": "",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seabhra/allora-filosofal-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/seabhra/allora-filosofal-api/issues"
+  },
+  "homepage": "https://github.com/seabhra/allora-filosofal-api#readme"
 }
