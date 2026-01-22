@@ -25,3 +25,4 @@ async function sendData() {
     console.error('Erro ao enviar dados:', error);
   }
 }
+
