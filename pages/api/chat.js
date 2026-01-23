@@ -1,49 +1,54 @@
-const express = require('express');
-const cors = require('cors');
+// api/chat.js
+import cors from 'cors';
+import { createCors, error } from 'micro';
 
-const app = express();
+// Configuração CORS manual (ou use micro-cors se preferir)
+const allowCors = fn => async (req, res) => {
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-// Configuração do CORS
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
-
-app.use(express.json());
-
-// Rota de teste
-app.get('/api/hello', (req, res) => {
-  try {
-    res.json({ message: 'Olá, API está funcionando!' });
-  } catch (error) {
-    console.error("Erro em /api/hello:", error);
-    res.status(500).json({ error: 'Erro interno no servidor' });
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
   }
-});
 
-// Rota principal para receber a pergunta
-app.post('/api/chat', async (req, res) => {
-  try {
-    const { pergunta } = req.body;
+  return await fn(req, res);
+};
 
-    if (!pergunta) {
-      return res.status(400).json({ error: 'Pergunta não fornecida' });
+const handler = async (req, res) => {
+  if (req.url === '/api/hello' && req.method === 'GET') {
+    return res.json({ message: 'Olá, API está funcionando!' });
+  }
+
+  if (req.url.startsWith('/api/chat') && req.method === 'POST') {
+    try {
+      let body = '';
+      for await (const chunk of req) {
+        body += chunk.toString();
+      }
+      const data = JSON.parse(body);
+      const { pergunta } = data;
+
+      if (!pergunta) {
+        return res.statusCode = 400, res.json({ error: 'Pergunta não fornecida' });
+      }
+
+      const resposta = `Resposta gerada para: ${pergunta}`;
+      return res.json({ resposta });
+    } catch (err) {
+      console.error('Erro em /api/chat:', err);
+      res.statusCode = 500;
+      return res.json({ error: 'Erro interno no servidor' });
     }
-
-    // Lógica para gerar a resposta (substitua com sua lógica real)
-    const resposta = `Resposta gerada para: ${pergunta}`;
-
-    res.json({ resposta });
-  } catch (error) {
-    console.error("Erro em /api/chat:", error);
-    res.status(500).json({ error: 'Erro interno no servidor' });
   }
-});
 
-// Middleware para tratar rotas não encontradas
-app.use((req, res) => {
-  res.status(404).json({ error: 'Rota não encontrada' });
-});
+  // Rota não encontrada
+  res.statusCode = 404;
+  return res.json({ error: 'Rota não encontrada' });
+};
 
-module.exports = app;
+export default allowCors(handler);
+
+
