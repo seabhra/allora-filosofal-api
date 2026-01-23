@@ -1,18 +1,34 @@
 // api/chat.js
-export default function handler(req, res) {
-	// Configura os cabeçalhos CORS
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-	res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  
-	if (req.method === 'POST') {
-	  const { pergunta } = req.body;
-	  const resposta = `Resposta da IA para: ${pergunta}`;
-	  res.status(200).json({ resposta });
-	} else if (req.method === 'OPTIONS') {
-	  res.status(200).end();
-	} else {
-	  res.status(405).json({ error: "Método não permitido" });
-	}
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+// Configure o CORS para aceitar requisições de qualquer origem
+app.use(cors({
+  origin: '*', // Permite qualquer origem (para desenvolvimento)
+  methods: ['GET', 'POST', 'OPTIONS'], // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'] // Cabeçalhos permitidos
+}));
+
+app.use(express.json());
+
+// Rota para receber a pergunta e gerar a resposta
+app.post('/api/chat', (req, res) => {
+  const { pergunta } = req.body;
+
+  if (!pergunta) {
+    return res.status(400).json({ error: 'Pergunta não fornecida' });
   }
-  
+
+  // Lógica para gerar a resposta
+  const resposta = `Resposta gerada para: ${pergunta}`;
+
+  res.json({ resposta });
+});
+
+// Rota de teste
+app.get('/api/hello', (req, res) => {
+  res.json({ message: 'Olá, API está funcionando!' });
+});
+
+module.exports = app;
