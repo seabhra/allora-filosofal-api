@@ -1,6 +1,3 @@
-
-// api/chat.js
-
 const express = require('express');
 const cors = require('cors');
 
@@ -15,17 +12,17 @@ app.use(cors({
 
 app.use(express.json());
 
-// Rota de teste (Acessível via GET em /api/chat)
+// Rota de teste (GET)
 app.get('/', (req, res) => {
   try {
-    res.json({ message: 'Olá, API está funcionando! Use POST para enviar perguntas.' });
+    res.json({ message: 'API rodando corretamente.' });
   } catch (error) {
-    console.error("Erro no GET /:", error);
-    res.status(500).json({ error: 'Erro interno no servidor' });
+    console.error("Erro no GET:", error);
+    res.status(500).json({ error: 'Erro interno' });
   }
 });
 
-// Rota principal para receber a pergunta (Use POST)
+// Rota principal (POST)
 app.post('/', async (req, res) => {
   try {
     const { pergunta } = req.body;
@@ -34,21 +31,20 @@ app.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Pergunta não fornecida' });
     }
 
-    // Lógica para gerar a resposta
-    const resposta = `Resposta gerada para: ${pergunta}`;
+    // Lógica de resposta
+    const resposta = `Você perguntou: ${pergunta}`;
 
     res.json({ resposta });
   } catch (error) {
-    console.error("Erro no POST /:", error);
+    console.error("Erro no POST:", error);
     res.status(500).json({ error: 'Erro interno no servidor' });
   }
 });
 
-// Middleware para tratar rotas não encontradas
+// Middleware 404
 app.use((req, res) => {
   res.status(404).json({ error: 'Rota não encontrada' });
 });
 
-// Exporta o app para o Vercel
+// Exportar o app diretamente (Vercel lida com isso)
 module.exports = app;
-
