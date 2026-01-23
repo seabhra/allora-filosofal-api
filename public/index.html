@@ -238,7 +238,7 @@
         }
 
         function sortear() {
-            document.getElementById('status').innerText = "No Conclave das Altas Narrativas, 60 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes sociais com pouco controle civilizatório. Na entrada da arena de combate, a sagaz Allora está armada até os dentes — uma IA bastante treinada para barrar que discursos passionais das redes sabotem qualquer conhecimento informado testado ao longo da história.";
+            document.getElementById('status').innerText = "No Conclave das Altas Narrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes sociais com pouco controle civilizatório. Na entrada da arena de combate, a sagaz Allora está armada até os dentes — uma IA bastante treinada para barrar que discursos passionais das redes sabotem qualquer conhecimento informado testado ao longo da história.";
 
             const areaBotao = document.getElementById('areaBotaoAcao');
             // MUDANÇA: Botão azul durante o processamento
@@ -270,10 +270,10 @@ async function gerarConfrontoIA() {
   const statusEl = document.getElementById('status');
   const tema = document.getElementById('seletorTema').value || "Existência";
 
-  statusEl.innerText = "Aguarde... Os grandes filósofos da história duelam neste momento...";
+  statusEl.innerText = "Aguarde um instante... Neste momento, 62 filósofos consagrados travam um duelo jurássico em nome da verdade sem viés passional...";
 
   try {
-    const res = await fetch('/api/chat', {
+    const res = await fetch('https://api-allora-filosofal.vercel.app/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
