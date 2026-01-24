@@ -8,18 +8,19 @@
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3940256099942544"
     crossorigin="anonymous"></script>
-    
+
   <script src="/script.js"></script>
-    
+
+
     <!-- Favicon -->
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="./favicon.ico" type="image/x-icon">
 
 <!-- Ícones PWA -->
-<link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="192x192" href="./icons/icon-192.png">
 
 <!-- Manifest -->
 
-<link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="./manifest.json">
 
 
 <meta name="theme-color" content="#6b46c1">
@@ -202,7 +203,7 @@
         <div id="status">Prepara-se... Começa a grande batalha do pensamento humano sem aquele velho viés passional tão presente nas redes hoje em dia. Chegou a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram — e que você ainda assume como seus. Nunca foram. Jogue sem dó e mate o que está te matando: a mentira intencional institucionalizada pelas Big Techs por mais poder político, econômico e religioso. Querem a dominação total!</div>
         
         <div id="aiBox">
-            <img src="imagens_app/zap.png" class="btn-zap-redondo" onclick="shareOnWhatsApp()">
+            <img src="cards_images/zap.png" class="btn-zap-redondo" onclick="shareOnWhatsApp()">
             <div id="conteudoIA"></div>
         </div>
     </div>
@@ -239,39 +240,33 @@
             document.getElementById('containerFilosofos').style.display = 'flex';
         }
 
-       // CHAMAda FUNÇÃO SORTEAR
         function sortear() {
-    document.getElementById('status').innerText = "No Conclave das Altas Narrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes sociais com pouco controle civilizatório. Na entrada da arena de combate, a sagaz Allora está armada até os dentes — uma IA bastante treinada para barrar que discursos passionais das redes sabotem qualquer conhecimento informado testado ao longo da história.";
+            document.getElementById('status').innerText = "No Conclave das Altas Narrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes sociais com pouco controle civilizatório. Na entrada da arena de combate, a sagaz Allora está armada até os dentes — uma IA bastante treinada para barrar que discursos passionais das redes sabotem qualquer conhecimento informado testado ao longo da história.";
 
-    const areaBotao = document.getElementById('areaBotaoAcao');
-    areaBotao.innerHTML = `<button class="btn-aurora azul-info">Agora a bola está com pensadores históricos...</button>`;
-    
-    let ciclos = 0;
-    const intervalo = setInterval(() => {
-        const tempL = filosofosLunares[Math.floor(Math.random() * filosofosLunares.length)];
-        const tempS = filosofosSolares[Math.floor(Math.random() * filosofosSolares.length)];
-        
-        const imgL = document.getElementById('fotoLunar');
-        const imgS = document.getElementById('fotoSolar');
-        
-        imgL.src = "imagens_lunares_png/" + tempL;
-        imgS.src = "imagens_solares_png/" + tempS;
+            const areaBotao = document.getElementById('areaBotaoAcao');
+            // MUDANÇA: Botão azul durante o processamento
+            areaBotao.innerHTML = `<button class="btn-aurora azul-info">Agora a bola está com pensadores históricos...</button>`;
+            
+            let ciclos = 0;
+            const intervalo = setInterval(() => {
+                const tempL = filosofosLunares[Math.floor(Math.random() * filosofosLunares.length)];
+                const tempS = filosofosSolares[Math.floor(Math.random() * filosofosSolares.length)];
+                
+                document.getElementById('fotoLunar').src = "imagens_lunares_png/" + tempL;
+                document.getElementById('fotoSolar').src = "imagens_solares_png/" + tempS;
+                
+                document.getElementById('nomeLunar').innerText = tempL.replace('.png', '').replace(/-/g, ' ');
+                document.getElementById('nomeSolar').innerText = tempS.replace('.png', '').replace(/-/g, ' ');
 
-        // TRATAMENTO DE ERRO PARA IMAGENS
-        imgL.onerror = function() { this.src = 'https://via.placeholder.com/150?text=Lunar'; };
-        imgS.onerror = function() { this.src = 'https://via.placeholder.com/150?text=Solar'; };
-        
-        document.getElementById('nomeLunar').innerText = tempL.replace('.png', '').replace(/-/g, ' ');
-        document.getElementById('nomeSolar').innerText = tempS.replace('.png', '').replace(/-/g, ' ');
-
-        if (ciclos++ > 100) {
-            clearInterval(intervalo);
-            lunarSorteado = tempL.replace('.png', '');
-            solarSorteado = tempS.replace('.png', '');
-            gerarConfrontoIA();
+                if (ciclos++ > 100) {
+                    clearInterval(intervalo);
+                    lunarSorteado = tempL.replace('.png', '');
+                    solarSorteado = tempS.replace('.png', '');
+                    gerarConfrontoIA();
+                }
+            }, 90);
         }
-    }, 90);
-}
+
         // CHAMADA DA API VERCEL
 
 async function gerarConfrontoIA() {
@@ -353,7 +348,4 @@ async function gerarConfrontoIA() {
 
     </script>
 </body>
-
 </html>
-
-
