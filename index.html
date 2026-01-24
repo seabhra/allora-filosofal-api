@@ -278,7 +278,7 @@ async function gerarConfrontoIA() {
   const statusEl = document.getElementById('status');
   const tema = document.getElementById('seletorTema').value || "Existência";
 
-  statusEl.innerText = "Aguarde um instante... Neste momento, 62 filósofos consagrados travam um duelo jurássico em nome da verdade sem viés passional...";
+  statusEl.innerText = "Aguarde um instante... Neste momento, os filósofos sorteados travam um duelo jurássico em nome da verdade sem viés passional...";
 
   try {
     const res = await fetch('https://api-allora-filosofal.vercel.app/api/chat', {
@@ -355,4 +355,5 @@ async function gerarConfrontoIA() {
 </body>
 
 </html>
+
 
