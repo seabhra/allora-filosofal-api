@@ -1,11 +1,12 @@
 {
-  "name": "Allora - Duelo de Ideias",
+  "name": "Allora - Duelo de Ideias de Alta Narrativa",
   "short_name": "Allora",
   "icons": [
     {
-      "src": "/icons/icon-192x192.png",
+      "src": "public/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     }
   ]
+
 }
