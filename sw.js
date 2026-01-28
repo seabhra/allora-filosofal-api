@@ -3,16 +3,16 @@ const CACHE_NAME = 'allora-cache-v10';
 // Lista de URLs para cache
 const urlsToCache = [
   '/',
-  '/index.html',
-  '/favicon.ico',
+  '/public/index.html',
+  '/public/favicon.ico',
   '/manifest.json',
-  '/imagens_app/img_espadas.png',
-  '/imagens_app/lunares.png',
-  '/imagens_app/solares.png',
-  '/imagens_app/verusX.png',
-  '/imagens_app/zap.png',
-  '/icons/icon-192.png',
-  // Adicione aqui outros arquivos estáticos que você quer cachear
+  '/public/imagens_app/img_espadas.png',
+  '/public/imagens_app/lunares.png',
+  '/public/imagens_app/solares.png',
+  '/public/imagens_app/verusX.png',
+  '/public/imagens_app/zap.png',
+  '/public/icons/icon-192.png'
+
 ];
 
 // Instalação do Service Worker e cache dos arquivos
@@ -82,5 +82,6 @@ self.addEventListener('fetch', (event) => {
       })
   );
 });
+
 
 
