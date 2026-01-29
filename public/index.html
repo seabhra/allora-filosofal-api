@@ -354,18 +354,15 @@ async function gerarConfrontoIA() {
         
   //WS PERMITE APP SEJA BAIXADA E INSTALADA
 
-  if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(registration => {
-        console.log('ServiceWorker registration successful');
-      })
-      .catch(err => {
-        console.log('ServiceWorker registration failed: ', err);
-      });
-  });
+        if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js') // Certifique-se que é apenas '/sw.js'
+    .then(reg => console.log('SW registrado'))
+    .catch(err => console.error('SW falhou', err));
 }
+
+
 
     </script>
 </body>
 </html>
+
