@@ -287,32 +287,46 @@
             }, 90);
         }
 
-        // CHAMADA DA API VERCEL
+  // CHAMADA DA API VERCEL GRATUITA (ATUALIZADA)
 
 async function gerarConfrontoIA() {
   const statusEl = document.getElementById('status');
   const tema = document.getElementById('seletorTema').value || "Existência";
 
-  statusEl.innerText = "Aguarde um instante... Neste momento, os filósofos sorteados travam um duelo jurássico em nome da verdade sem viés passional...";
+  statusEl.innerText = "Aguarde um instante... os filósofos sorteados travam um duelo jurássico em nome da verdade sem viés passional...";
 
   try {
+    // Construção do prompt
+    const promptTexto = `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`;
+
     const res = await fetch('/api/chat', {
       method: 'POST',
+      // OBRIGATÓRIO: Cabeçalho JSON
       headers: { 'Content-Type': 'application/json' },
+      // OBRIGATÓRIO: Payload no formato esperado pelo backend (Groq)
       body: JSON.stringify({
-        pergunta: `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`
+        messages: [
+          { role: 'user', content: promptTexto }
+        ],
+        model: 'llama-3.3-70b-versatile'
       })
     });
 
+    // Tratamento de Erro HTTP (400, 401, 500, etc)
     if (!res.ok) {
-      throw new Error(`API respondeu ${res.status}`);
+      const errData = await res.json();
+      // Tenta pegar a mensagem específica do erro, senão usa status genérico
+      throw new Error(`API respondeu ${res.status}: ${errData.error || 'Erro desconhecido'}`);
     }
 
     const data = await res.json();
 
-    if (!data.resposta) {
-      throw new Error("Resposta inválida da API");
+    // Extração segura do conteúdo da resposta da Groq
+    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+      throw new Error("A API retornou uma estrutura de dados inválida.");
     }
+
+    const respostaTexto = data.choices[0].message.content;
 
     document.getElementById('conteudoIA').innerHTML = `
       <h3 style="color:#4a148c; text-align:center">
@@ -322,15 +336,15 @@ async function gerarConfrontoIA() {
         <strong>Tema:</strong> ${tema}
       </p>
       <hr>
-      <p>${data.resposta.replace(/\n/g, '<br>')}</p>
+      <p>${respostaTexto.replace(/\n/g, '<br>')}</p>
     `;
 
     document.getElementById('aiBox').style.display = 'block';
-    statusEl.innerText = "O duelo foi concluído.";
+    statusEl.innerText = "O grande duelo foi concluído.";
 
     document.getElementById('areaBotaoAcao').innerHTML =
       `<button onclick="location.reload()" class="btn-aurora verde">
-        ♻️ Novo Duelo entre Pensadores
+        ♻️ Novo Combate de Titãs
       </button>`;
 
   } catch (e) {
@@ -339,7 +353,7 @@ async function gerarConfrontoIA() {
 
     document.getElementById('areaBotaoAcao').innerHTML =
       `<button onclick="location.reload()" class="btn-aurora verde">
-        ♻️ Novo Duelo de Titãs
+        ♻️ Novo Combate de Titãs
       </button>`;
   }
 }
@@ -365,4 +379,5 @@ async function gerarConfrontoIA() {
     </script>
 </body>
 </html>
+
 
