@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3940256099942544"
-crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3940256099942544"
+    crossorigin="anonymous"></script>
 
 <!-- Favicon -->
 <link rel="icon" href="./favicon.ico" type="image/x-icon">
@@ -21,404 +22,364 @@ crossorigin="anonymous"></script>
 
 <meta name="theme-color" content="#6b46c1">
 
-<title>Allora - Duelo de Ideias Sem Paixão</title>
-<style>
-* { box-sizing: border-box; }
+    <title>Allora - Duelo de Ideias Sem Paixão</title>
+    <style>
+        * { box-sizing: border-box; }
+        
 
+        body {
+  margin: 0;
+  padding: 10px;
 
-body {
-margin: 0;
-padding: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fdfcfd;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
 
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-background: #fdfcfd;
-color: white;
-text-align: center;
-overflow-x: hidden;
-
-/* centralização */
-display: flex;
-justify-content: center; /* horizontal */
-align-items: center; /* vertical */
-min-height: 100vh;
+  /* centralização */
+  display: flex;
+  justify-content: center; /* horizontal */
+  align-items: center;     /* vertical */
+  min-height: 100vh;
 }
 
-#pageLoader {
-position: fixed; inset: 0; background: transparente;
-z-index: 9999; display: flex; align-items: center; justify-content: center;
+        #pageLoader {
+            position: fixed; inset: 0; background: transparente;
+            z-index: 9999; display: flex; align-items: center; justify-content: center;
+        }
+
+        .loader-circle {
+            width: 60px; height: 60px; border: 6px solid #fdfcfd;
+            border-top: 6px solid #d847cf; border-radius: 50%; animation: spin 1.5s linear infinite;
+        }
+
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* controla o menu caixa */
+        .menu-caixa {
+  background: rgba(69, 89, 222, 0.9);
+  backdrop-filter: blur(6px);
+  color: #333;
+  padding: 5px;
+  border-radius: 20px;
+  height: 400px;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
-.loader-circle {
-width: 60px; height: 60px; border: 6px solid #fdfcfd;
-border-top: 6px solid #d847cf; border-radius: 50%; animation: spin 1.5s linear infinite;
-}
+        #erroTema {
+            color: #a6ff00;
+            font-size: 12px;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 5px;
+        }
 
-@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-/* controla o menu caixa */
-.menu-caixa {
-background: rgba(69, 89, 222, 0.9);
-backdrop-filter: blur(6px);
-color: #333;
-padding: 5px;
-border-radius: 20px;
-height: 400px;
-max-width: 360px;
-width: 100%;
-box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-}
-
-#erroTema {
-color: #a6ff00;
-font-size: 12px;
-font-weight: bold;
-display: none;
-margin-bottom: 5px;
-}
-
-.img-espadas {
-display: block;
-margin: -30px auto; /* controla topo e base */
-width: 100vw;
-max-width: 280px;
-aspect-ratio: 1 / 1;
-object-fit: contain;
+        .img-espadas {
+  display: block;
+  margin: -30px auto; /* controla topo e base */
+  width: 100vw;
+  max-width: 280px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
 }
 
 .img-versus-central {
-width: 40px;
-height: 40px;
-align-self: center;
-object-fit: contain;
-margin: -10px 5px; /* zero vertical, só lateral */
+  width: 40px;
+  height: 40px;
+  align-self: center;
+  object-fit: contain;
+  margin: -10px 5px; /* zero vertical, só lateral */
 }
 
-.seletor-tema {
-width: 100%; padding: 12px; margin: 10px 0;
-border-radius: 12px; border: 2px solid #9d5fe9;
-background: white; font-weight: bold; color: #4a148c;
+        .seletor-tema {
+            width: 100%; padding: 12px; margin: 10px 0;
+            border-radius: 12px; border: 2px solid #9d5fe9;
+            background: white; font-weight: bold; color: #4a148c;
+        }
+
+        .btn-aurora { 
+            width: 100%; padding: 12px; margin: 6px 0; border: none; 
+            border-radius: 16px; font-weight: bold; cursor: pointer; 
+            color: white; font-size: 16px; transition: transform 0.2s ease;
+        }
+
+        .btn-aurora:active { transform: scale(0.97); }
+        .roxo { background: #98df4c; } /* Cor para o botão inicial */
+        .rosa { background: #f49bb9; }
+        .azul-info { background: #4caedf; cursor: default; } /* Cor Azul Informativa */
+        .verde { background: #5ae9e9; } /* Nova cor Verde claro */
+
+        .cards-area { 
+            display: none; justify-content: center; gap: 10px; 
+            margin: 12px auto 40px; padding: 15px 10px; background: rgba(255,255,255,0.2);
+            border-radius: 20px; flex-wrap: nowrap;
+            align-items: center;
+            max-width: 420px;
+        }
+
+        .card-container { width: 185px; height: 220px;} 
+
+        .card { 
+            width: 100%; height: 220px; background: #1a1a1a; 
+            border-radius: 12px; border: 3px solid #fff; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); position: relative;
+        }
+
+        .card img { width: 100%; height: 95%; object-fit: cover; object-position: top; }
+
+        .label-card { 
+            position: absolute; top: 0; width: 100%; background: rgba(0,0,0,0.7);
+            color: #fff; font-size: 11.5px; padding: 4px 2px; font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .nome-filosofo {
+            margin-top: 8px; background: #638da3; color: white;
+            font-size: 11px; padding: 6px; border-radius: 8px;
+            min-height: 35px; display: flex; align-items: center; justify-content: center;
+            line-height: 1.1; font-weight: bold;
+        }
+
+        #status {
+  margin: 10px auto;
+  font-size: 14px;
+  color: #979494;
+  font-weight: normal;
+  padding: 0 15px;
+  max-width: 420px;
+  text-align: left; /* alinhamento à esquerda */
+  display: block;
 }
 
-.btn-aurora {
-width: 100%; padding: 12px; margin: 6px 0; border: none;
-border-radius: 16px; font-weight: bold; cursor: pointer;
-color: white; font-size: 16px; transition: transform 0.2s ease;
-}
+        #aiBox { 
+            display: none; 
+            background: white; 
+            color: #333; 
+            padding: 18px; 
+            border-radius: 15px; 
+            text-align: left; 
+            margin: 15px auto; 
+            max-width: 420px;
+            font-size: 15px; 
+            line-height: 1.6; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+        }
 
-.btn-aurora:active { transform: scale(0.97); }
-.roxo { background: #98df4c; } /* Cor para o botão inicial */
-.rosa { background: #f49bb9; }
-.azul-info { background: #4caedf; cursor: default; } /* Cor Azul Informativa */
-.verde { background: #5ae9e9; } /* Nova cor Verde claro */
+        .btn-zap-redondo { position: absolute; top: 10px; right: 10px; width: 40px; cursor: pointer; }
 
-.cards-area {
-display: none; justify-content: center; gap: 10px;
-margin: 12px auto 40px; padding: 15px 10px; background: rgba(255,255,255,0.2);
-border-radius: 20px; flex-wrap: nowrap;
-align-items: center;
-max-width: 420px;
-}
+        #btnSorteio {
+            max-width: 420px;
+            margin: 6px auto;
+            display: block;
+        }
 
-.card-container { width: 185px; height: 220px;}
-
-.card {
-width: 100%; height: 220px; background: #1a1a1a;
-border-radius: 12px; border: 3px solid #fff; overflow: hidden;
-box-shadow: 0 4px 15px rgba(0,0,0,0.5); position: relative;
-}
-
-.card img { width: 100%; height: 95%; object-fit: cover; object-position: top; }
-
-.label-card {
-position: absolute; top: 0; width: 100%; background: rgba(0,0,0,0.7);
-color: #fff; font-size: 11.5px; padding: 4px 2px; font-weight: bold;
-white-space: nowrap;
-}
-
-.nome-filosofo {
-margin-top: 8px; background: #638da3; color: white;
-font-size: 11px; padding: 6px; border-radius: 8px;
-min-height: 35px; display: flex; align-items: center; justify-content: center;
-line-height: 1.1; font-weight: bold;
-}
-
-#status {
-margin: 10px auto;
-font-size: 14px;
-color: #979494;
-font-weight: normal;
-padding: 0 15px;
-max-width: 420px;
-text-align: left; /* alinhamento à esquerda */
-display: block;
-}
-
-#aiBox {
-display: none;
-background: white;
-color: #333;
-padding: 18px;
-border-radius: 15px;
-text-align: left;
-margin: 15px auto;
-max-width: 420px;
-font-size: 15px;
-line-height: 1.6;
-box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-position: relative;
-}
-
-.btn-zap-redondo { position: absolute; top: 10px; right: 10px; width: 40px; cursor: pointer; }
-
-#btnSorteio {
-max-width: 420px;
-margin: 6px auto;
-display: block;
-}
-
-</style>
+    </style>
 </head>
 
 <body onload="document.getElementById('pageLoader').style.display='none';">
 
-<div id="pageLoader"><div class="loader-circle"></div></div>
+    <div id="pageLoader"><div class="loader-circle"></div></div>
 
-<div id="menuInicial" class="menu-caixa">
-<div class="banner-abertura">
-<img src="imagens_app/img_espadas.png" class="img-espadas" alt="Espadas">
-</div>
-<p style="color:#ede4e4; font-weight: bold; margin: 5px 0;">Digite ou selecione um tema:</p>
-<div id="erroTema">⚠️ Por favor, escolha um tema antes de iniciar!</div>
-<input list="temasFilosoficos" id="seletorTema" class="seletor-tema" placeholder="Escreva seu próprio tema do momento...">
-<datalist id="temasFilosoficos"></datalist>
-<button onclick="iniciarDuelo()" class="btn-aurora roxo">⚔️ Bora Duelar no Modo Profundo</button>
-</div>
+    <div id="menuInicial" class="menu-caixa">
+        <div class="banner-abertura">
+            <img src="imagens_app/img_espadas.png" class="img-espadas" alt="Espadas">
+        </div>
+        <p style="color:#ede4e4; font-weight: bold; margin: 5px 0;">Digite ou selecione um tema:</p>
+        <div id="erroTema">⚠️ Por favor, escolha um tema antes de iniciar!</div>
+        <input list="temasFilosoficos" id="seletorTema" class="seletor-tema" placeholder="Escreva seu próprio tema do momento...">
+        <datalist id="temasFilosoficos"></datalist>
+        <button onclick="iniciarDuelo()" class="btn-aurora roxo">⚔️ Bora Duelar no Modo Profundo</button>
+    </div>
+    
+    <div id="jogoArea" style="display:none;">
+        <div class="cards-area" id="containerFilosofos">
+            <div class="card-container">
+                <div class="card">
+                    <img id="fotoLunar" src="imagens_app/lunares.png">
+                    <div class="label-card">Lunares: desconfiam!</div>
+                </div>
+                <div id="nomeLunar" class="nome-filosofo">Prontos para duelar...</div>
+            </div>
+            
+            <img src="imagens_app/verusX.png" class="img-versus-central">
+            
+            <div class="card-container">
+                <div class="card">
+                    <img id="fotoSolar" src="imagens_app/solares.png">
+                    <div class="label-card">Solares: prometem!</div>
+                </div>
+                <div id="nomeSolar" class="nome-filosofo">Prontos para duelar...</div>
+            </div>
+        </div>
+        
+        <div id="areaBotaoAcao">
+            <button id="btnSorteio" class="btn-aurora rosa" onclick="sortear()">🃏Jogar Clássicos da Filosofia</button>
+        </div>
+        
+        <div id="status">Prepara-se... Em jogo a grande batalha do pensamento humano sem viés passional. Agora é a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram — e que você ainda assume como seus. Jogue sem dó e mate o que está te matando: a mentira intencional por mais poder político, econômico e religioso. Quando jogar também é ler...</div>
+        
+        <div id="aiBox">
+            <img src="public/imagens_app/zap.png" class="btn-zap-redondo" onclick="shareOnWhatsApp()">
+            <div id="conteudoIA"></div>
+        </div>
+    </div>
 
-<div id="jogoArea" style="display:none;">
-<div class="cards-area" id="containerFilosofos">
-<div class="card-container">
-<div class="card">
-<img id="fotoLunar" src="imagens_app/lunares.png">
-<div class="label-card">Lunares: desconfiam!</div>
-</div>
-<div id="nomeLunar" class="nome-filosofo">Prontos para duelar...</div>
-</div>
+    <script>
+        const filosofosLunares = ["Albert-Camus.png", "Adorno.png", "Benjamin.png", "Byung-Chul-Han.png", "Carl-Jung.png", "Emil-Cioran.png", "Fernando-Pessoa.png", "Foucault.png", "Freud.png", "Georges-Bataille.png", "Gilles-Deleuze.png", "Guy-Debord.png", "Hannah-Arendt.png", "Heidegger.png", "Heraclito.png", "Huizinga.png", "Hume.png", "Jacques-Derrida.png", "John-Gray.png", "Kierkegaard.png", "Lucrecio.png", "Ludwig-Wittgenstein.png", "Nietzsche.png", "Pascal.png", "Peter-Zapfee.png", "Santo-Agostinho.png", "Sartre.png", "Schopenhauer.png", "Unamuno.png", "Vilém-Flusser.png"];
+        const filosofosSolares = ["Aristoteles.png", "Bernard Suits.png", "Bostrom.png", "Buno Latour.png", "Cicero.png", "Comte.png", "Descartes.png", "Durkheim.png", "Francis Bacon.png", "Habermas.png", "Harari.png", "Hegel.png", "John Nash.png", "Kant.png", "Leibniz.png", "Locke.png", "Marx.png", "Mill.png", "Montesquieu.png", "Pitagoras.png", "Platao.png", "Roger Caillois.png", "Rousseau.png", "Sloterdijk.png", "Socrates.png", "Spinoza.png", "Steve Bannon.png", "Thomas Schelling.png", "Tomas de Aquino.png", "Weber.png"];
 
-<img src="imagens_app/verusX.png" class="img-versus-central">
+        let lunarSorteado = "";
+        let solarSorteado = "";
 
-<div class="card-container">
-<div class="card">
-<img id="fotoSolar" src="imagens_app/solares.png">
-<div class="label-card">Solares: prometem!</div>
-</div>
-<div id="nomeSolar" class="nome-filosofo">Prontos para duelar...</div>
-</div>
-</div>
+        fetch("https://raw.githubusercontent.com/seabhra/allora-filosofal-api/main/temas_filosoficos.json")
+          .then(res => res.json())
+          .then(data => {
+            const datalist = document.getElementById("temasFilosoficos");
+            datalist.innerHTML = "";
+            data.temas.forEach(tema => {
+              const option = document.createElement("option");
+              option.value = tema;
+              datalist.appendChild(option);
+            });
+          });
 
-<div id="areaBotaoAcao">
-<button id="btnSorteio" class="btn-aurora rosa" onclick="sortear()">🃏Jogar Clássicos da Filosofia</button>
-</div>
+        function iniciarDuelo() {
+            const temaInput = document.getElementById('seletorTema').value;
+            const erroEl = document.getElementById('erroTema');
+            if (temaInput.trim() === "") {
+                erroEl.style.display = 'block';
+                return;
+            }
+            erroEl.style.display = 'none';
+            document.getElementById('menuInicial').style.display = 'none';
+            document.getElementById('jogoArea').style.display = 'block';
+            document.getElementById('containerFilosofos').style.display = 'flex';
+        }
 
-<div id="status">Prepara-se... Em jogo a grande batalha do pensamento humano sem viés passional. Agora é a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram — e que você ainda assume como seus. Jogue sem dó e mate o que está te matando: a mentira intencional por mais poder político, econômico e religioso. Quando jogar também é ler...</div>
+        function sortear() {
+            document.getElementById('status').innerText = "No Conclave das Altas Narrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes com pouco controle institucional. Na entrada da arena de combate, Allora Pensa está armada até os dentes — uma IA treinada para barrar que discursos passionais sabotem qualquer conhecimento informado.";
 
+            const areaBotao = document.getElementById('areaBotaoAcao');
+            // MUDANÇA: Botão azul durante o processamento
+            areaBotao.innerHTML = `<button class="btn-aurora azul-info">Clássicos em combate: eles ainda pensam...</button>`;
+            
+            let ciclos = 0;
+            const intervalo = setInterval(() => {
+                const tempL = filosofosLunares[Math.floor(Math.random() * filosofosLunares.length)];
+                const tempS = filosofosSolares[Math.floor(Math.random() * filosofosSolares.length)];
+                
+                document.getElementById('fotoLunar').src = "imagens_lunares_png/" + tempL;
+                document.getElementById('fotoSolar').src = "imagens_solares_png/" + tempS;
+                
+                document.getElementById('nomeLunar').innerText = tempL.replace('.png', '').replace(/-/g, ' ');
+                document.getElementById('nomeSolar').innerText = tempS.replace('.png', '').replace(/-/g, ' ');
 
-  <!-- Area da analise de conteúdo da IA -->
-<div id="aiBox">
-    <!-- Ícone WhatsApp -->
-       <img src="public/imagens_app/zap.png" class="btn-zap-redondo" onclick="shareOnWhatsApp()">   </div>
-    <div id="conteudoIA"></div>
-</div>
-
-<!-- Container do Anúncio posicionado APÓS o aiBox -->
-<div id="ad-container">
-    <!-- O conteúdo do anúncio será injetado aqui via JS -->
-</div>
-
-</div>
-
-<script>
-const filosofosLunares = ["Albert-Camus.png", "Adorno.png", "Benjamin.png", "Byung-Chul-Han.png", "Carl-Jung.png", "Emil-Cioran.png", "Fernando-Pessoa.png", "Foucault.png", "Freud.png", "Georges-Bataille.png", "Gilles-Deleuze.png", "Guy-Debord.png", "Hannah-Arendt.png", "Heidegger.png", "Heraclito.png", "Huizinga.png", "Hume.png", "Jacques-Derrida.png", "John-Gray.png", "Kierkegaard.png", "Lucrecio.png", "Ludwig-Wittgenstein.png", "Nietzsche.png", "Pascal.png", "Peter-Zapfee.png", "Santo-Agostinho.png", "Sartre.png", "Schopenhauer.png", "Unamuno.png", "Vilém-Flusser.png"];
-const filosofosSolares = ["Aristoteles.png", "Bernard Suits.png", "Bostrom.png", "Buno Latour.png", "Cicero.png", "Comte.png", "Descartes.png", "Durkheim.png", "Francis Bacon.png", "Habermas.png", "Harari.png", "Hegel.png", "John Nash.png", "Kant.png", "Leibniz.png", "Locke.png", "Marx.png", "Mill.png", "Montesquieu.png", "Pitagoras.png", "Platao.png", "Roger Caillois.png", "Rousseau.png", "Sloterdijk.png", "Socrates.png", "Spinoza.png", "Steve Bannon.png", "Thomas Schelling.png", "Tomas de Aquino.png", "Weber.png"];
-
-let lunarSorteado = "";
-let solarSorteado = "";
-
-fetch("https://raw.githubusercontent.com/seabhra/allora-filosofal-api/main/temas_filosoficos.json")
-.then(res => res.json())
-.then(data => {
-const datalist = document.getElementById("temasFilosoficos");
-datalist.innerHTML = "";
-data.temas.forEach(tema => {
-const option = document.createElement("option");
-option.value = tema;
-datalist.appendChild(option);
-});
-});
-
-function iniciarDuelo() {
-const temaInput = document.getElementById('seletorTema').value;
-const erroEl = document.getElementById('erroTema');
-if (temaInput.trim() === "") {
-erroEl.style.display = 'block';
-return;
-}
-erroEl.style.display = 'none';
-document.getElementById('menuInicial').style.display = 'none';
-document.getElementById('jogoArea').style.display = 'block';
-document.getElementById('containerFilosofos').style.display = 'flex';
-}
-
-function sortear() {
-document.getElementById('status').innerText = "No Conclave das Altas Narrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes com pouco controle institucional. Na entrada da arena de combate, Allora Pensa está armada até os dentes — uma IA treinada para barrar que discursos passionais sabotem qualquer conhecimento informado.";
-
-const areaBotao = document.getElementById('areaBotaoAcao');
-// MUDANÇA: Botão azul durante o processamento
-areaBotao.innerHTML = `<button class="btn-aurora azul-info">Clássicos em combate: eles ainda pensam...</button>`;
-
-let ciclos = 0;
-const intervalo = setInterval(() => {
-const tempL = filosofosLunares[Math.floor(Math.random() * filosofosLunares.length)];
-const tempS = filosofosSolares[Math.floor(Math.random() * filosofosSolares.length)];
-
-document.getElementById('fotoLunar').src = "imagens_lunares_png/" + tempL;
-document.getElementById('fotoSolar').src = "imagens_solares_png/" + tempS;
-
-document.getElementById('nomeLunar').innerText = tempL.replace('.png', '').replace(/-/g, ' ');
-document.getElementById('nomeSolar').innerText = tempS.replace('.png', '').replace(/-/g, ' ');
-
-if (ciclos++ > 100) {
-clearInterval(intervalo);
-lunarSorteado = tempL.replace('.png', '');
-solarSorteado = tempS.replace('.png', '');
-gerarConfrontoIA();
-}
-}, 90);
-}
+                if (ciclos++ > 100) {
+                    clearInterval(intervalo);
+                    lunarSorteado = tempL.replace('.png', '');
+                    solarSorteado = tempS.replace('.png', '');
+                    gerarConfrontoIA();
+                }
+            }, 90);
+        }
 
 // CHAMADA DA API VERCEL GRATUITA (ATUALIZADA)
 
 async function gerarConfrontoIA() {
-const statusEl = document.getElementById('status');
-const tema = document.getElementById('seletorTema').value || "Existência";
+  const statusEl = document.getElementById('status');
+  const tema = document.getElementById('seletorTema').value || "Existência";
 
-statusEl.innerText = "Aguarde um instante... os filósofos sorteados travam um duelo jurássico em nome da verdade sem viés passional...";
+  statusEl.innerText = "Aguarde um instante... os filósofos sorteados travam um duelo jurássico em nome da verdade sem viés passional...";
 
-try {
-// Construção do prompt
-const promptTexto = `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`;
+  try {
+    // Construção do prompt
+    const promptTexto = `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`;
 
-const res = await fetch('/api/chat', {
-method: 'POST',
-// OBRIGATÓRIO: Cabeçalho JSON
-headers: { 'Content-Type': 'application/json' },
-// OBRIGATÓRIO: Payload no formato esperado pelo backend (Groq)
-body: JSON.stringify({
-messages: [
-{ role: 'user', content: promptTexto }
-],
-model: 'llama-3.3-70b-versatile'
-})
-});
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      // OBRIGATÓRIO: Cabeçalho JSON
+      headers: { 'Content-Type': 'application/json' },
+      // OBRIGATÓRIO: Payload no formato esperado pelo backend (Groq)
+      body: JSON.stringify({
+        messages: [
+          { role: 'user', content: promptTexto }
+        ],
+        model: 'llama-3.3-70b-versatile'
+      })
+    });
 
-// Tratamento de Erro HTTP (400, 401, 500, etc)
-if (!res.ok) {
-const errData = await res.json();
-// Tenta pegar a mensagem específica do erro, senão usa status genérico
-throw new Error(`API respondeu ${res.status}: ${errData.error || 'Erro desconhecido'}`);
+    // Tratamento de Erro HTTP (400, 401, 500, etc)
+    if (!res.ok) {
+      const errData = await res.json();
+      // Tenta pegar a mensagem específica do erro, senão usa status genérico
+      throw new Error(`API respondeu ${res.status}: ${errData.error || 'Erro desconhecido'}`);
+    }
+
+    const data = await res.json();
+
+    // Extração segura do conteúdo da resposta da Groq
+    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+      throw new Error("A API retornou uma estrutura de dados inválida.");
+    }
+
+    const respostaTexto = data.choices[0].message.content;
+
+    document.getElementById('conteudoIA').innerHTML = `
+      <h3 style="color:#4a148c; text-align:center">
+        ⚔️ ${lunarSorteado} vs ${solarSorteado}
+      </h3>
+      <p style="font-size:13px; color:#666">
+        <strong>Tema:</strong> ${tema}
+      </p>
+      <hr>
+      <p>${respostaTexto.replace(/\n/g, '<br>')}</p>
+    `;
+
+    document.getElementById('aiBox').style.display = 'block';
+    statusEl.innerText = "O grande duelo foi concluído.";
+
+    document.getElementById('areaBotaoAcao').innerHTML =
+      `<button onclick="location.reload()" class="btn-aurora verde">
+        ♻️ Novo Combate de Titãs
+      </button>`;
+
+  } catch (e) {
+    console.error(e);
+    statusEl.innerText = "Erro ao acessar a IA: " + e.message;
+
+    document.getElementById('areaBotaoAcao').innerHTML =
+      `<button onclick="location.reload()" class="btn-aurora verde">
+        ♻️ Novo Combate de Titãs
+      </button>`;
+  }
 }
 
-const data = await res.json();
+ // CHAMADA DO WHATSAPP
 
-// Extração segura do conteúdo da resposta da Groq
-if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-throw new Error("A API retornou uma estrutura de dados inválida.");
+        function shareOnWhatsApp() {
+            const texto = document.querySelector('#conteudoIA').innerText;
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent("🔥 Veja este duelo filosófico:\n\n" + texto)}`, '_blank');
+        }
+
+        
+  //WS PERMITE APP SEJA BAIXADA E INSTALADA
+
+  if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('ServiceWorker registration successful');
+      })
+      .catch(err => {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+  });
 }
 
-const respostaTexto = data.choices[0].message.content;
-
-document.getElementById('conteudoIA').innerHTML = `
-<h3 style="color:#4a148c; text-align:center">
-⚔️ ${lunarSorteado} vs ${solarSorteado}
-</h3>
-<p style="font-size:13px; color:#666">
-<strong>Tema:</strong> ${tema}
-</p>
-<hr>
-<p>${respostaTexto.replace(/\n/g, '<br>')}</p>
-`;
-
-document.getElementById('aiBox').style.display = 'block';
-statusEl.innerText = "O grande duelo foi concluído.";
-
-// Area do botão de novo combate
-document.getElementById('areaBotaoAcao').innerHTML =
-`<button onclick="location.reload()" class="btn-aurora verde">
-♻️ Novo Combate de Titãs
-</button>`;
-
-} catch (e) {
-console.error(e);
-statusEl.innerText = "Erro ao acessar a IA: " + e.message;
-
-document.getElementById('areaBotaoAcao').innerHTML =
-`<button onclick="location.reload()" class="btn-aurora verde">
-♻️ Novo Combate de Titãs
-</button>`;
-}
-}
-
-//container do anúncio dentro do ConteúdoIA
-
-const adContainer = document.getElementById('ad-container');
-if (adContainer) {
-adContainer.style.display = 'block';
-// Tenta carregar o anúncio agora que o container está visível.
-try {
-(adsbygoogle = window.adsbygoogle || []).push({});
-} catch (e) {
-console.error("Erro ao tentar carregar o anúncio:", e);
-}
-}
-
-
-
-// CHAMADA DO WHATSAPP
-
-function shareOnWhatsApp() {
-const elemento = document.querySelector('#conteudoIA');
-
-if (!elemento) {
-console.error("Elemento #conteudoIA não encontrado");
-return;
-}
-const texto = elemento.innerText.trim();
-
-if (!texto) {
-alert("Não há texto para compartilhar.");
-return;
-}
-const mensagem = "🔥 Veja este duelo filosófico:\n\n" + texto;
-const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(mensagem)}`;
-
-window.open(url, '_blank');
-}
-
-
-
-//WS PERMITE APP SEJA BAIXADA E INSTALADA
-
-if ('serviceWorker' in navigator) {
-navigator.serviceWorker.register('/sw.js') // Certifique-se que é apenas '/sw.js'
-.then(reg => console.log('SW registrado'))
-.catch(err => console.error('SW falhou', err));
-}
-
-
-
-</script>
+    </script>
 </body>
 </html>
-
-
-
-
