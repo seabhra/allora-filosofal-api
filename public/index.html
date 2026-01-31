@@ -175,6 +175,21 @@ margin: 6px auto;
 display: block;
 }
 
+  /* CSS ADICIONADO: Garante que o container do anúncio tenha tamanho e cor de fundo */
+  #ad-container {
+            display: none; /* Começa escondido */
+            width: 100%;
+            max-width: 420px;
+            margin: 20px auto;
+            min-height: 100px; /* Altura mínima para reservar espaço */
+            background-color: rgba(255, 255, 255, 0.1); /* Fundo sutil para visualização */
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+
 </style>
 </head>
 
@@ -423,3 +438,4 @@ console.log('ServiceWorker registration failed: ', err);
 </script>
 </body>
 </html>
+
