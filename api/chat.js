@@ -57,7 +57,7 @@ app.post('/api/chat', async (req, res) => {
                 model: model || 'llama-3.3-70b-versatile',
                 messages: messages,
                 temperature: temperature || 0.7,
-                max_tokens: max_tokens || 900
+                max_tokens: max_tokens || 1500
             })
         });
 
@@ -83,5 +83,6 @@ app.listen(PORT, () => {
     console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
     console.log(`📂 Frontend disponível em http://localhost:${PORT}/index.html`);
 });
+
 
 
