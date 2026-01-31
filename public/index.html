@@ -367,36 +367,17 @@ document.getElementById('areaBotaoAcao').innerHTML =
 }
 }
 
-// Função dedicada para injetar e carregar o anúncio  dentro do ConteúdoIA
-function carregarAnuncio() {
-    const adContainer = document.getElementById('ad-container');
+//container do anúncio dentro do ConteúdoIA
 
-    if (!adContainer) {
-        console.error("Elemento #ad-container não encontrado");
-        return;
-    }
-
-    adContainer.style.display = 'block';
-
-    adContainer.innerHTML = `
-        <span style="font-size:10px; color:#999; margin-bottom:5px; display:block; text-align:center;">
-            Publicidade
-        </span>
-
-        <ins class="adsbygoogle"
-             style="display:block; width:100%; min-height:100px;"
-             data-ad-client="ca-pub-3940256099942544"
-             data-ad-slot="6300978111"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-    `;
-
-    try {
-        window.adsbygoogle = window.adsbygoogle || [];
-        window.adsbygoogle.push({});
-    } catch (e) {
-        console.error("Erro ao carregar anúncio:", e);
-    }
+const adContainer = document.getElementById('ad-container');
+if (adContainer) {
+adContainer.style.display = 'block';
+// Tenta carregar o anúncio agora que o container está visível.
+try {
+(adsbygoogle = window.adsbygoogle || []).push({});
+} catch (e) {
+console.error("Erro ao tentar carregar o anúncio:", e);
+}
 }
 
 
@@ -437,6 +418,7 @@ navigator.serviceWorker.register('/sw.js') // Certifique-se que é apenas '/sw.j
 </script>
 </body>
 </html>
+
 
 
 
