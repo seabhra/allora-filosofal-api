@@ -223,7 +223,7 @@
         <div id="status">Prepara-se... Em jogo a grande batalha do pensamento humano sem viés passional. Agora é a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram — e que você ainda assume como seus. Jogue sem dó e mate o que está te matando: a mentira intencional por mais poder político, econômico e religioso. Quando jogar também é ler...</div>
         
         <div id="aiBox">
-            <img src="cards_images/zap.png" class="btn-zap-redondo" onclick="shareOnWhatsApp()">
+            <img src="public/cards_images/zap.png" class="btn-zap-redondo" onclick="shareOnWhatsApp()">
             <div id="conteudoIA"></div>
         </div>
     </div>
@@ -360,10 +360,27 @@ async function gerarConfrontoIA() {
 
  // CHAMADA DO WHATSAPP
 
-        function shareOnWhatsApp() {
-            const texto = document.querySelector('#conteudoIA').innerText;
-            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent("🔥 Veja este duelo filosófico:\n\n" + texto)}`, '_blank');
-        }
+      function shareOnWhatsApp() {
+    const elemento = document.querySelector('#conteudoIA');
+
+    if (!elemento) {
+        console.error("Elemento #conteudoIA não encontrado");
+        return;
+    }
+
+    const texto = elemento.innerText.trim();
+
+    if (!texto) {
+        alert("Não há texto para compartilhar.");
+        return;
+    }
+
+    const mensagem = "🔥 Veja este duelo filosófico:\n\n" + texto;
+    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(mensagem)}`;
+
+    window.open(url, '_blank');
+}
+
 
         
   //WS PERMITE APP SEJA BAIXADA E INSTALADA
@@ -379,5 +396,6 @@ async function gerarConfrontoIA() {
     </script>
 </body>
 </html>
+
 
 
