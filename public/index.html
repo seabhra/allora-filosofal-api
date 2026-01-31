@@ -221,9 +221,12 @@ display: block;
 
 <div id="status">Prepara-se... Em jogo a grande batalha do pensamento humano sem viés passional. Agora é a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram — e que você ainda assume como seus. Jogue sem dó e mate o que está te matando: a mentira intencional por mais poder político, econômico e religioso. Quando jogar também é ler...</div>
 
-<!-- Container do aiBox de analise de conteúdo-->
 <div id="aiBox">
-    
+<img src="public/imagens_app/zap.png" class="btn-zap-redondo" onclick="shareOnWhatsApp()">
+<div id="conteudoIA"></div>
+</div>
+
+<div id="aiBox">
     <!-- Ícone WhatsApp -->
        <img src="public/imagens_app/zap.png" class="btn-zap-redondo" onclick="shareOnWhatsApp()">   </div>
     <div id="conteudoIA"></div>
@@ -350,35 +353,19 @@ document.getElementById('conteudoIA').innerHTML = `
 document.getElementById('aiBox').style.display = 'block';
 statusEl.innerText = "O grande duelo foi concluído.";
 
+//container do anúncio dentro do ConteúdoIA
 
-// Função dedicada para injetar e carregar o anúncio  dentro do ConteúdoIA
-function carregarAnuncio() {
-    const adContainer = document.getElementById('ad-container');
-    
-    // Mostra o container
-    adContainer.style.display = 'block';
-
-    // Injeta o HTML do anúncio. Isso é necessário para 'resetar' o slot e forçar um novo carregamento
-        adContainer.innerHTML = `
-        <span style="font-size:10px; color:#999; margin-bottom:5px; display:block; text-align:center;">
-        Publicidade</span>
-         <ins class="adsbygoogle"
-         style="display:block; width:100%; min-height:100px;"
-         data-ad-client="ca-pub-3940256099942544"
-         data-ad-slot="6300978111"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-`;
-
-    // Aciona o script do Google AdSense para preencher o <ins> que acabamos de criar
-    try {
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      console.error("Erro ao carregar anúncio:", e);
-    }
+const adContainer = document.getElementById('ad-container');
+if (adContainer) {
+adContainer.style.display = 'block';
+// Tenta carregar o anúncio agora que o container está visível.
+try {
+(adsbygoogle = window.adsbygoogle || []).push({});
+} catch (e) {
+console.error("Erro ao tentar carregar o anúncio:", e);
+}
 }
 
-//container da parea do botão de ação
 document.getElementById('areaBotaoAcao').innerHTML =
 `<button onclick="location.reload()" class="btn-aurora verde">
 ♻️ Novo Combate de Titãs
@@ -416,6 +403,8 @@ const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(mensagem)}`
 window.open(url, '_blank');
 }
 
+
+
 //WS PERMITE APP SEJA BAIXADA E INSTALADA
 
 if ('serviceWorker' in navigator) {
@@ -423,6 +412,8 @@ navigator.serviceWorker.register('/sw.js') // Certifique-se que é apenas '/sw.j
 .then(reg => console.log('SW registrado'))
 .catch(err => console.error('SW falhou', err));
 }
+
+
 
 </script>
 </body>
