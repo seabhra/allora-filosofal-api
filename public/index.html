@@ -7,8 +7,6 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3940256099942544"
 crossorigin="anonymous"></script>
 
-  
-
 <!-- Favicon -->
 <link rel="icon" href="./favicon.ico" type="image/x-icon">
 
@@ -18,34 +16,26 @@ crossorigin="anonymous"></script>
 <!-- Manifest json -->
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#6b46c1">
-
-
-<meta name="theme-color" content="#6b46c1">
-
 <title>Allora - Duelo de Ideias Sem Paixão</title>
 <style>
 * { box-sizing: border-box; }
 
-
 body {
 margin: 0;
 padding: 10px;
-
 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 background: #fdfcfd;
 color: white;
 text-align: center;
 overflow-x: hidden;
-
-/* centralização */
 display: flex;
-justify-content: center; /* horizontal */
-align-items: center; /* vertical */
+justify-content: center; 
+align-items: center; 
 min-height: 100vh;
 }
 
 #pageLoader {
-position: fixed; inset: 0; background: transparente;
+position: fixed; inset: 0; background: transparent; /* Corrigido de transparente para transparent */
 z-index: 9999; display: flex; align-items: center; justify-content: center;
 }
 
@@ -56,7 +46,6 @@ border-top: 6px solid #d847cf; border-radius: 50%; animation: spin 1.5s linear i
 
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-/* controla o menu caixa */
 .menu-caixa {
 background: rgba(69, 89, 222, 0.9);
 backdrop-filter: blur(6px);
@@ -79,7 +68,7 @@ margin-bottom: 5px;
 
 .img-espadas {
 display: block;
-margin: -30px auto; /* controla topo e base */
+margin: -30px auto; 
 width: 100vw;
 max-width: 280px;
 aspect-ratio: 1 / 1;
@@ -91,7 +80,7 @@ width: 40px;
 height: 40px;
 align-self: center;
 object-fit: contain;
-margin: -10px 5px; /* zero vertical, só lateral */
+margin: -10px 5px; 
 }
 
 .seletor-tema {
@@ -107,10 +96,10 @@ color: white; font-size: 16px; transition: transform 0.2s ease;
 }
 
 .btn-aurora:active { transform: scale(0.97); }
-.roxo { background: #98df4c; } /* Cor para o botão inicial */
+.roxo { background: #98df4c; } 
 .rosa { background: #f49bb9; }
-.azul-info { background: #4caedf; cursor: default; } /* Cor Azul Informativa */
-.verde { background: #5ae9e9; } /* Nova cor Verde claro */
+.azul-info { background: #4caedf; cursor: default; } 
+.verde { background: #5ae9e9; } 
 
 .cards-area {
 display: none; justify-content: center; gap: 10px;
@@ -152,7 +141,7 @@ font-weight: normal;
 padding: 0 15px;
 width: 100%;
 max-width: 100%;
-text-align: left; /* alinhamento à esquerda */
+text-align: left; 
 display: block;
 }
 
@@ -172,7 +161,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 position: relative;
 }
 
-.btn-zap-redondo { position: absolute; top: 10px; right: 10px; width: 40px; cursor: pointer; }
+.btn-zap-redondo { position: absolute; top: 10px; right: 10px; width: 40px; cursor: pointer; z-index: 10; }
 
 #btnSorteio {
 width: 100%;
@@ -181,79 +170,74 @@ margin: 6px auto;
 display: block;
 }
 
-  /* CSS ADICIONADO: Garante que o container do anúncio tenha tamanho e cor de fundo */
-  #ad-container {
-            display: none; /* Começa escondido */
-            width: 100%;
-            max-width: 100%;
-            margin: 20px auto;
-            min-height: 100px; /* Altura mínima para reservar espaço */
-            background-color: rgba(96, 180, 193, 0.1); /* Fundo sutil para visualização */
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
-            padding: 10px;
-            overflow: visible;
-        }
-
-
+/* CSS ADICIONADO: Container do anúncio */
+#ad-container {
+    display: block; /* Pode ser controlado via JS */
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto 0;
+    min-height: 100px;
+    background-color: rgba(96, 180, 193, 0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 10px;
+    overflow: visible;
+}
 </style>
 </head>
 
 <body onload="document.getElementById('pageLoader').style.display='none';">
-
 <div id="pageLoader"><div class="loader-circle"></div></div>
 
 <div id="menuInicial" class="menu-caixa">
-<div class="banner-abertura">
-<img src="imagens_app/img_espadas.png" class="img-espadas" alt="Espadas">
-</div>
-<p style="color:#ede4e4; font-weight: bold; margin: 5px 0;">Digite ou selecione um tema:</p>
-<div id="erroTema">⚠️ Por favor, escolha um tema antes de iniciar!</div>
-<input list="temasFilosoficos" id="seletorTema" class="seletor-tema" placeholder="Escreva seu próprio tema do momento...">
-<datalist id="temasFilosoficos"></datalist>
-<button onclick="iniciarDuelo()" class="btn-aurora roxo">⚔️ Bora Duelar no Modo Profundo</button>
+    <div class="banner-abertura">
+        <img src="imagens_app/img_espadas.png" class="img-espadas" alt="Espadas">
+    </div>
+    <p style="color:#ede4e4; font-weight: bold; margin: 5px 0;">Digite ou selecione um tema:</p>
+    <div id="erroTema">⚠️ Por favor, escolha um tema antes de iniciar!</div>
+    <input list="temasFilosoficos" id="seletorTema" class="seletor-tema" placeholder="Escreva seu próprio tema do momento...">
+    <datalist id="temasFilosoficos"></datalist>
+    <button onclick="iniciarDuelo()" class="btn-aurora roxo">⚔️ Bora Duelar no Modo Profundo</button>
 </div>
 
 <div id="jogoArea" style="display:none;">
-<div class="cards-area" id="containerFilosofos">
-<div class="card-container">
-<div class="card">
-<img id="fotoLunar" src="imagens_app/lunares.png">
-<div class="label-card">Lunares: desconfiam!</div>
-</div>
-<div id="nomeLunar" class="nome-filosofo">Prontos para duelar...</div>
-</div>
+    <div class="cards-area" id="containerFilosofos">
+        <div class="card-container">
+            <div class="card">
+                <img id="fotoLunar" src="imagens_app/lunares.png">
+                <div class="label-card">Lunares: desconfiam!</div>
+            </div>
+            <div id="nomeLunar" class="nome-filosofo">Prontos para duelar...</div>
+        </div>
+        <img src="imagens_app/verusX.png" class="img-versus-central">
+        <div class="card-container">
+            <div class="card">
+                <img id="fotoSolar" src="imagens_app/solares.png">
+                <div class="label-card">Solares: prometem!</div>
+            </div>
+            <div id="nomeSolar" class="nome-filosofo">Prontos para duelar...</div>
+        </div>
+    </div>
 
-<img src="imagens_app/verusX.png" class="img-versus-central">
+    <div id="areaBotaoAcao">
+        <button id="btnSorteio" class="btn-aurora rosa" onclick="sortear()">🃏Jogar Clássicos da Filosofia</button>
+    </div>
 
-<div class="card-container">
-<div class="card">
-<img id="fotoSolar" src="imagens_app/solares.png">
-<div class="label-card">Solares: prometem!</div>
-</div>
-<div id="nomeSolar" class="nome-filosofo">Prontos para duelar...</div>
-</div>
-</div>
+    <div id="status">Prepara-se... Em jogo a grande batalha do pensamento humano sem viés passional. Agora é a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram — e que você ainda assume como seus. Jogue sem dó e mate o que está te matando: a mentira intencional por mais poder político, econômico e religioso. Quando jogar também é ler...</div>
 
-<div id="areaBotaoAcao">
-<button id="btnSorteio" class="btn-aurora rosa" onclick="sortear()">🃏Jogar Clássicos da Filosofia</button>
-</div>
-
-<div id="status">Prepara-se... Em jogo a grande batalha do pensamento humano sem viés passional. Agora é a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram — e que você ainda assume como seus. Jogue sem dó e mate o que está te matando: a mentira intencional por mais poder político, econômico e religioso. Quando jogar também é ler...</div>
-
-<!-- Container do botão do zap e do Anúncio -->
-<div id="aiBox">
-<img src="public/imagens_app/zap.png" class="btn-zap-redondo" onclick="shareOnWhatsApp()">
-
-<!-- Container da analise da IA -->
-<div id="conteudoIA"></div>
-</div>
-
-<!-- Container do Anúncio posicionado APÓS o aiBox -->
-<div id="ad-container">
-<!-- O conteúdo do anúncio será injetado aqui via JS -->
-</div>
-
+    <!-- LOCAL Compartilhar no WhatsApp e Anúncio -->
+    <div id="aiBox">
+        <!-- O conteúdo será injetado aqui via JS -->
+        <div id="conteudoIA"></div>
+        <div id="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3940256099942544"
+                 data-ad-slot="6300978111"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -266,210 +250,190 @@ let solarSorteado = "";
 fetch("https://raw.githubusercontent.com/seabhra/allora-filosofal-api/main/temas_filosoficos.json")
 .then(res => res.json())
 .then(data => {
-const datalist = document.getElementById("temasFilosoficos");
-datalist.innerHTML = "";
-data.temas.forEach(tema => {
-const option = document.createElement("option");
-option.value = tema;
-datalist.appendChild(option);
-});
+    const datalist = document.getElementById("temasFilosoficos");
+    datalist.innerHTML = "";
+    data.temas.forEach(tema => {
+        const option = document.createElement("option");
+        option.value = tema;
+        datalist.appendChild(option);
+    });
 });
 
 function iniciarDuelo() {
-const temaInput = document.getElementById('seletorTema').value;
-const erroEl = document.getElementById('erroTema');
-if (temaInput.trim() === "") {
-erroEl.style.display = 'block';
-return;
-}
-erroEl.style.display = 'none';
-document.getElementById('menuInicial').style.display = 'none';
-document.getElementById('jogoArea').style.display = 'block';
-document.getElementById('containerFilosofos').style.display = 'flex';
+    const temaInput = document.getElementById('seletorTema').value;
+    const erroEl = document.getElementById('erroTema');
+    if (temaInput.trim() === "") {
+        erroEl.style.display = 'block';
+        return;
+    }
+    erroEl.style.display = 'none';
+    document.getElementById('menuInicial').style.display = 'none';
+    document.getElementById('jogoArea').style.display = 'block';
+    document.getElementById('containerFilosofos').style.display = 'flex';
 }
 
 function sortear() {
-document.getElementById('status').innerText = "No Conclave das Metanarrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes com pouco controle institucional. Na arena dos Titâs do Pensamento, Allora Pensar está armada até os dentes — uma IA treinada para barrar que discursos passionais sabotem qualquer conhecimento informado.";
+    document.getElementById('status').innerText = "No Conclave das Metanarrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes com pouco controle institucional. Na arena dos Titãs do Pensamento, Allora Pensar está armada até os dentes — uma IA treinada para barrar que discursos passionais sabotem qualquer conhecimento informado.";
 
-const areaBotao = document.getElementById('areaBotaoAcao');
-// MUDANÇA: Botão azul durante o processamento
-areaBotao.innerHTML = `<button class="btn-aurora azul-info">Clássicos em combate: eles ainda pensam...</button>`;
+    const areaBotao = document.getElementById('areaBotaoAcao');
+    areaBotao.innerHTML = `<button class="btn-aurora azul-info">Clássicos em combate: eles ainda pensam...</button>`;
 
-let ciclos = 0;
-const intervalo = setInterval(() => {
-const tempL = filosofosLunares[Math.floor(Math.random() * filosofosLunares.length)];
-const tempS = filosofosSolares[Math.floor(Math.random() * filosofosSolares.length)];
+    let ciclos = 0;
+    const intervalo = setInterval(() => {
+        const tempL = filosofosLunares[Math.floor(Math.random() * filosofosLunares.length)];
+        const tempS = filosofosSolares[Math.floor(Math.random() * filosofosSolares.length)];
 
-document.getElementById('fotoLunar').src = "imagens_lunares_png/" + tempL;
-document.getElementById('fotoSolar').src = "imagens_solares_png/" + tempS;
+        document.getElementById('fotoLunar').src = "imagens_lunares_png/" + tempL;
+        document.getElementById('fotoSolar').src = "imagens_solares_png/" + tempS;
 
-document.getElementById('nomeLunar').innerText = tempL.replace('.png', '').replace(/-/g, ' ');
-document.getElementById('nomeSolar').innerText = tempS.replace('.png', '').replace(/-/g, ' ');
+        document.getElementById('nomeLunar').innerText = tempL.replace('.png', '').replace(/-/g, ' ');
+        document.getElementById('nomeSolar').innerText = tempS.replace('.png', '').replace(/-/g, ' ');
 
-if (ciclos++ > 100) {
-clearInterval(intervalo);
-lunarSorteado = tempL.replace('.png', '');
-solarSorteado = tempS.replace('.png', '');
-gerarConfrontoIA();
-}
-}, 90);
+        if (ciclos++ > 100) {
+            clearInterval(intervalo);
+            lunarSorteado = tempL.replace('.png', '');
+            solarSorteado = tempS.replace('.png', '');
+            gerarConfrontoIA();
+        }
+    }, 90);
 }
 
 // CHAMADA DA API VERCEL GRATUITA (ATUALIZADA)
-
 async function gerarConfrontoIA() {
-const statusEl = document.getElementById('status');
-const tema = document.getElementById('seletorTema').value || "Existência";
+    const statusEl = document.getElementById('status');
+    const tema = document.getElementById('seletorTema').value || "Existência";
 
-statusEl.innerText = "Aguarde um instante... os filósofos sorteados travam um duelo jurássico em nome da verdade sem viés passional...";
+    statusEl.innerText = "Aguarde um instante... os filósofos sorteados travam um duelo jurássico em nome da verdade sem viés passional...";
 
-try {
-// Construção do prompt
-const promptTexto = `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`;
-
-const res = await fetch('/api/chat', {
-method: 'POST',
-// OBRIGATÓRIO: Cabeçalho JSON
-headers: { 'Content-Type': 'application/json' },
-// OBRIGATÓRIO: Payload no formato esperado pelo backend (Groq)
-body: JSON.stringify({
-messages: [
-{ role: 'user', content: promptTexto }
-],
-model: 'llama-3.3-70b-versatile'
-})
-});
-
-// Tratamento de Erro HTTP (400, 401, 500, etc)
-if (!res.ok) {
-const errData = await res.json();
-// Tenta pegar a mensagem específica do erro, senão usa status genérico
-throw new Error(`API respondeu ${res.status}: ${errData.error || 'Erro desconhecido'}`);
-}
-
-const data = await res.json();
-
-// Extração segura do conteúdo da resposta da Groq
-if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-throw new Error("A API retornou uma estrutura de dados inválida.");
-}
-
-const respostaTexto = data.choices[0].message.content;
-
-document.getElementById('conteudoIA').innerHTML = `
-<h3 style="color:#4a148c; text-align:center">
-⚔️ ${lunarSorteado} vs ${solarSorteado}
-</h3>
-<p style="font-size:13px; color:#666">
-<strong>Tema em disputa:</strong> ${tema}
-</p>
-<hr>
-<p>${respostaTexto.replace(/\n/g, '<br>')}</p>
-`;
-
-document.getElementById('aiBox').style.display = 'block';
-statusEl.innerText = "O grande duelo foi concluído.";
-statusEl.style.textAlign = "center";
-statusEl.style.color = "#00cc66";   // verde mais elegante que o radioativo padrão
-statusEl.style.fontWeight = "500";
-
-document.getElementById('areaBotaoAcao').innerHTML =
-`<button onclick="location.reload()" class="btn-aurora verde">
-♻️ Novo Combate de Titãs
-</button>`;
-
-} catch (e) {
-console.error(e);
-statusEl.innerText = "Erro ao acessar a IA: " + e.message;
-
-document.getElementById('areaBotaoAcao').innerHTML =
-`<button onclick="location.reload()" class="btn-aurora verde">
-♻️ Novo Combate de Titãs
-</button>`;
-}
-
- 
-// Função dedicada para injetar e carregar o anúncio dentro do ConteúdoIA
-
-  function carregarAnuncio() {
-  const adContainer = document.getElementById('ad-container');
-
-  if (!adContainer) {
-    console.error("Elemento #ad-container não encontrado");
-    return;
-  }
-
-  adContainer.style.display = 'block';
-
-  adContainer.innerHTML = `
-    <span style="font-size:10px;color:#999;text-align:center;display:block">
-      Publicidade
-    </span>
-
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-3940256099942544"
-         data-ad-slot="6300978111"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-  `;
-
-  // Espera o script existir
-  setTimeout(() => {
     try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      console.error("Erro ao carregar anúncio:", e);
-    }
-  }, 300);
-} 
-}
-// CHAMADA DO WHATSAPP
+        const promptTexto = `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`;
 
-  function shareOnWhatsApp() {
-    const box = document.querySelector('#conteudoIA');
+        const res = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                messages: [{ role: 'user', content: promptTexto }],
+                model: 'llama-3.3-70b-versatile'
+            })
+        });
+
+        if (!res.ok) {
+            const errData = await res.json();
+            throw new Error(`API respondeu ${res.status}: ${errData.error || 'Erro desconhecido'}`);
+        }
+
+        const data = await res.json();
+
+        if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+            throw new Error("A API retornou uma estrutura de dados inválida.");
+        }
+
+        const respostaTexto = data.choices[0].message.content;
+        const aiBox = document.getElementById('aiBox');
+
+        // Renderiza o conteúdo completo (Título, Texto, Botão ZAP e Anúncio)
+        // Note: O container do anúncio é mantido, mas pode ser re-injetado se necessário
+        aiBox.innerHTML = `
+          <h2 class="ai-title" style="color:#4a148c; margin-top:0;">
+            <img src="public/imagens_app/logo_circular.png" class="ai-logo" style="width:30px; vertical-align:middle; margin-right:10px;">
+            Allora Assistente de IA
+          </h2>
+          
+          <div style="margin-bottom: 15px;">
+            <h3 style="color:#4a148c; text-align:center; margin: 10px 0;">
+                ⚔️ ${lunarSorteado} vs ${solarSorteado}
+            </h3>
+            <p style="font-size:13px; color:#666; text-align:center">
+                <strong>Tema em disputa:</strong> ${tema}
+            </p>
+            <hr style="border:0; border-top:1px solid #eee;">
+            <p>${respostaTexto.replace(/\n/g, '<br>')}</p>
+          </div>
+
+          <img src="public/imagens_app/zap.png"
+               class="btn-zap-redondo"
+               onclick="shareOnWhatsApp()"
+               title="Compartilhar">
+
+          <div id="ad-container">
+            <span style="font-size:10px;color:#999;text-align:center;display:block">Publicidade</span>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3940256099942544"
+                 data-ad-slot="6300978111"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+        `;
+
+        aiBox.style.display = 'block';
+        statusEl.innerText = "O grande duelo foi concluído.";
+        statusEl.style.textAlign = "center";
+        statusEl.style.color = "#00cc66";
+        statusEl.style.fontWeight = "500";
+
+        // Carregar o anúncio
+        setTimeout(() => {
+            try {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) {
+                console.error("Erro ao carregar anúncio:", e);
+            }
+        }, 300);
+
+        document.getElementById('areaBotaoAcao').innerHTML = `
+          <button onclick="location.reload()" class="btn-aurora verde">
+            ♻️ Novo Combate de Titãs
+          </button>
+        `;
+
+    } catch (e) {
+        console.error(e);
+        statusEl.innerText = "Erro ao acessar a IA: " + e.message;
+        document.getElementById('areaBotaoAcao').innerHTML = `
+            <button onclick="location.reload()" class="btn-aurora verde">
+            ♻️ Novo Combate de Titãs
+            </button>
+        `;
+    }
+}
+
+// CHAMADA DO WHATSAPP (Movido para fora do escopo local)
+function shareOnWhatsApp() {
+    // Pega o texto de dentro do aiBox, mas filtra para pegar apenas o conteúdo do duelo se possível
+    // Como reconstruímos o innerHTML, vamos pegar o innerText direto do aiBox
+    const box = document.getElementById('aiBox');
+    
     if (!box) {
         alert("Conteúdo não encontrado para compartilhar.");
         return;
     }
-    let texto = box.innerText.trim();
+
+    // Tenta pegar o texto, mas remove o texto "Publicidade" e "Allora Assistente" se possível
+    let texto = box.innerText.replace("Publicidade", "").trim();
+
     if (!texto) {
         alert("Ainda não há duelo para compartilhar.");
         return;
     }
-    // corta com elegância revolucionária
+
     if (texto.length > 2000) {
         texto = texto.substring(0, 2000) + "...";
     }
-    const mensagem =
-`🔥 Veja este duelo filosófico:
 
-${texto}
-
-🧠 via Allora – A Arena dos Titâs do Pensamento`;
-
+    const mensagem = `🔥 Veja este duelo filosófico:\n\n${texto}\n\n🧠 via Allora – A Arena dos Titãs do Pensamento`;
     const url = "https://api.whatsapp.com/send?text=" + encodeURIComponent(mensagem);
-
     window.open(url, '_blank');
 }
 
-
-  //WS PERMITE APP SEJA BAIXADA E INSTALADA
-
-  if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(registration => {
-        console.log('ServiceWorker registration successful');
-      })
-      .catch(err => {
-        console.log('ServiceWorker registration failed: ', err);
-      });
-  });
+// WS PERMITE APP SER BAIXADA E INSTALADA (Movido para fora)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+        .then(() => console.log('ServiceWorker registration successful'))
+        .catch(err => console.log('ServiceWorker registration failed: ', err));
+    });
 }
 </script>
 </body>
 </html>
-
-
-
