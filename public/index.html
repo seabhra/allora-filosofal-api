@@ -426,10 +426,33 @@ document.getElementById('areaBotaoAcao').innerHTML =
 }
 // CHAMADA DO WHATSAPP
 
-        function shareOnWhatsApp() {
-            const texto = document.querySelector('#conteudoIA').innerText;
-            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent("🔥 Veja este duelo filosófico:\n\n" + texto)}`, '_blank');
-        }
+  function shareOnWhatsApp() {
+    const box = document.querySelector('#conteudoIA');
+    if (!box) {
+        alert("Conteúdo não encontrado para compartilhar.");
+        return;
+    }
+    let texto = box.innerText.trim();
+    if (!texto) {
+        alert("Ainda não há duelo para compartilhar.");
+        return;
+    }
+    // corta com elegância revolucionária
+    if (texto.length > 2000) {
+        texto = texto.substring(0, 2000) + "...";
+    }
+    const mensagem =
+`🔥 Veja este duelo filosófico:
+
+${texto}
+
+🧠 via Allora – A Arena dos Titâs do Pensamento`;
+
+    const url = "https://api.whatsapp.com/send?text=" + encodeURIComponent(mensagem);
+
+    window.open(url, '_blank');
+}
+
 
   //WS PERMITE APP SEJA BAIXADA E INSTALADA
 
@@ -447,4 +470,5 @@ document.getElementById('areaBotaoAcao').innerHTML =
 </script>
 </body>
 </html>
+
 
