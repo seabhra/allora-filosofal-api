@@ -7,6 +7,8 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3940256099942544"
 crossorigin="anonymous"></script>
 
+  
+
 <!-- Favicon -->
 <link rel="icon" href="./favicon.ico" type="image/x-icon">
 
@@ -381,61 +383,42 @@ document.getElementById('areaBotaoAcao').innerHTML =
 }
 
 // Função dedicada para injetar e carregar o anúncio dentro do ConteúdoIA
-function carregarAnuncio() {
-const adContainer = document.getElementById('ad-container');
 
-if (!adContainer) {
-console.error("Elemento #ad-container não encontrado");
-return;
-}
+  function carregarAnuncio() {
+  const adContainer = document.getElementById('ad-container');
 
-adContainer.style.display = 'block';
+  if (!adContainer) {
+    console.error("Elemento #ad-container não encontrado");
+    return;
+  }
 
-adContainer.innerHTML = `
-<span style="font-size:10px; color:#999; margin-bottom:5px; display:block; text-align:center;">
-Publicidade
-</span>
+  adContainer.style.display = 'block';
 
-<ins class="adsbygoogle"
-style="display:block; width:100%; min-height:100px;"
-data-ad-client="ca-pub-3940256099942544"
-data-ad-slot="6300978111"
-data-ad-format="auto"
-data-full-width-responsive="true"></ins>
-`;
+  adContainer.innerHTML = `
+    <span style="font-size:10px;color:#999;text-align:center;display:block">
+      Publicidade
+    </span>
 
-try {
-window.adsbygoogle = window.adsbygoogle || [];
-window.adsbygoogle.push({});
-} catch (e) {
-console.error("Erro ao carregar anúncio:", e);
-}
-}
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3940256099942544"
+         data-ad-slot="6300978111"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  `;
 
-
-// CHAMADA DO WHATSAPP
-
-function shareOnWhatsApp() {
-const texto = document.querySelector('#conteudoIA').innerText;
-window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent("🔥 Veja este duelo filosófico:\n\n" + texto)}`, '_blank');
-}
-
-
-//WS PERMITE APP SEJA BAIXADA E INSTALADA
-
-if ('serviceWorker' in navigator) {
-window.addEventListener('load', () => {
-navigator.serviceWorker.register('/sw.js')
-.then(registration => {
-console.log('ServiceWorker registration successful');
-})
-.catch(err => {
-console.log('ServiceWorker registration failed: ', err);
-});
-});
+  // Espera o script existir
+  setTimeout(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+      console.error("Erro ao carregar anúncio:", e);
+    }
+  }, 300);
 }
 
 </script>
 </body>
 </html>
+
 
