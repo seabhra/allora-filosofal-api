@@ -369,6 +369,9 @@ document.getElementById('conteudoIA').innerHTML = `
 
 document.getElementById('aiBox').style.display = 'block';
 statusEl.innerText = "O grande duelo foi concluído.";
+statusEl.style.textAlign = "center";
+statusEl.style.color = "#00cc66";   // verde mais elegante que o radioativo padrão
+statusEl.style.fontWeight = "500";
 
 document.getElementById('areaBotaoAcao').innerHTML =
 `<button onclick="location.reload()" class="btn-aurora verde">
@@ -419,10 +422,29 @@ document.getElementById('areaBotaoAcao').innerHTML =
       console.error("Erro ao carregar anúncio:", e);
     }
   }, 300);
+} 
 }
- 
-}
+// CHAMADA DO WHATSAPP
 
+        function shareOnWhatsApp() {
+            const texto = document.querySelector('#conteudoIA').innerText;
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent("🔥 Veja este duelo filosófico:\n\n" + texto)}`, '_blank');
+        }
+
+  //WS PERMITE APP SEJA BAIXADA E INSTALADA
+
+  if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('ServiceWorker registration successful');
+      })
+      .catch(err => {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+  });
+}
 </script>
 </body>
 </html>
+
