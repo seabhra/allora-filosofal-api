@@ -179,7 +179,7 @@ display: block;
 
   /* CSS ADICIONADO: Garante que o container do anúncio tenha tamanho e cor de fundo */
   #ad-container {
-            display: block; /* Começa escondido */
+            display: none; /* Começa escondido */
             width: 100%;
             max-width: 420px;
             margin: 20px auto;
@@ -380,8 +380,8 @@ document.getElementById('areaBotaoAcao').innerHTML =
 ♻️ Novo Combate de Titãs
 </button>`;
 }
-}
 
+ 
 // Função dedicada para injetar e carregar o anúncio dentro do ConteúdoIA
 
   function carregarAnuncio() {
@@ -416,10 +416,13 @@ document.getElementById('areaBotaoAcao').innerHTML =
     }
   }, 300);
 }
+ 
+}
 
 </script>
 </body>
 </html>
+
 
 
 
