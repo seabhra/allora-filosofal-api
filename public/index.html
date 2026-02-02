@@ -16,7 +16,7 @@ crossorigin="anonymous"></script>
 <!-- Manifest json -->
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#6b46c1">
-<title>Allora - Duelo de Ideias Sem Paixão</title>
+<title>Allora (re)Narrar - Duelo de Ideias Sem Paixão</title>
 <style>
 * { box-sizing: border-box; }
 
@@ -197,7 +197,7 @@ display: block;
     <div id="erroTema">⚠️ Por favor, escolha um tema antes de iniciar!</div>
     <input list="temasFilosoficos" id="seletorTema" class="seletor-tema" placeholder="Escreva seu próprio tema do momento...">
     <datalist id="temasFilosoficos"></datalist>
-    <button onclick="iniciarDuelo()" class="btn-aurora roxo">⚔️ Bora Duelar no Modo Profundo</button>
+    <button onclick="iniciarDuelo()" class="btn-aurora roxo">⚔️ Bora (re)Narrar</button>
 </div>
 
 <div id="jogoArea" style="display:none;">
@@ -273,7 +273,7 @@ function iniciarDuelo() {
 }
 
 function sortear() {
-    document.getElementById('status').innerText = "No Conclave das Metanarrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes com pouco controle institucional. Na arena dos Titãs do Pensamento, Allora Pensar está armada até os dentes — uma IA treinada para barrar que discursos passionais sabotem qualquer conhecimento informado.";
+    document.getElementById('status').innerText = "No Conclave das Metanarrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes com pouco controle institucional. Na arena dos Titãs do Pensamento, Allora (re)Narrar está armada até os dentes — uma IA treinada para barrar que discursos passionais sabotem qualquer conhecimento informado.";
 
     const areaBotao = document.getElementById('areaBotaoAcao');
     areaBotao.innerHTML = `<button class="btn-aurora azul-info">Clássicos em combate: eles ainda pensam...</button>`;
@@ -437,3 +437,4 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
