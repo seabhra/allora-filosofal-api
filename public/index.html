@@ -239,7 +239,7 @@ border: 1px solid #ddd;
         <button id="btnSorteio" class="btn-aurora rosa" onclick="sortear()">🃏Bora MetaNarrar Clássicos</button>
     </div>
 
-    <div id="status">Prepara-se... Em jogo a grande batalha do pensamento humano sem viés passional. Agora é a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram.</div>
+    <div id="status">Prepara-se... Em jogo a grande batalha do pensamento humano sem viés passional. Agora é a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram — e que você ainda assume como seus. Jogue sem dó e mate o que está te matando: a mentira intencional por mais poder político, econômico e religioso. Quando jogar também é ler.</div>
 
     <!-- CAIXA DE RESULTADO E ANÚNCIO -->
     <div id="aiBox">
@@ -314,10 +314,10 @@ function sortear() {
   // Tocar som de shuffle (ignora erro se não houver interação do usuário ainda)
   shuffleAudio.play().catch(e => console.log("Interagir primeiro para tocar som"));
 
-  document.getElementById('status').innerText = "No Conclave das Metanarrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual...";
+  document.getElementById('status').innerText = "No Conclave das Metanarrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes com pouco controle institucional. Na arena dos Titãs do Pensamento, Allora (re)Narrar está armada até os dentes — uma IA treinada para barrar que discursos passionais sabotem qualquer conhecimento informado.";
   
   const areaBotao = document.getElementById('areaBotaoAcao');
-  areaBotao.innerHTML = `<button class="btn-aurora azul-info">Clássicos em combate: eles ainda pensam...</button>`;
+  areaBotao.innerHTML = `<button class="btn-aurora azul-info">Clássicos em combate...</button>`;
 
   // Ocultar resultado anterior se houver
   const aiBox = document.getElementById('aiBox');
@@ -484,3 +484,4 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
