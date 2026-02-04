@@ -99,7 +99,7 @@ background: white; font-weight: bold; color: #4a148c;
 }
 
 .btn-aurora {
-width: 100%; padding: 12px; margin: 6px 0; border: none;
+width: 100%; padding: 12px; margin: 2px 0 2px 0; border: none;
 border-radius: 16px; font-weight: bold; cursor: pointer;
 color: white; font-size: 16px; transition: transform 0.2s ease;
 }
@@ -152,7 +152,7 @@ line-height: 1.1; font-weight: bold;
 }
 
 #status {
-margin: 15px auto;
+margin: 5px 0 5px 0;
 font-size: 13px;
 color: #555; /* Texto escuro para leitura no fundo claro */
 background: rgba(255,255,255,0.8);
@@ -270,7 +270,7 @@ memoriesAudio.volume = 0.5;
 shuffleAudio.volume = 0.5;
 
 // ---------------- DADOS E INICIALIZAÇÃO ----------------
-const filosofosLunares = ["Albert-Camus.png", "Adorno.png", "Benjamin.png", "Byung-Chul-Han.png", "Carl-Jung.png", "Emil-Cioran.png", "Fernando-Pessoa.png", "Foucault.png", "Freud.png", "Georges-Bataille.png", "Gilles-Deleuze.png", "Guy-Debord.png", "Hannah-Arendt.png", "Heidegger.png", "Heraclito.png", "Huizinga.png", "Hume.png", "Jacques-Derrida.png", "John-Gray.png", "Kierkegaard.png", "Lucrecio.png", "Ludwig-Wittgenstein.png", "Nietzsche.png", "Pascal.png", "Peter-Zapfee.png", "Santo-Agostinho.png", "Sartre.png", "Schopenhauer.png", "Unamuno.png", "Vilém-Flusser.png"];
+const filosofosLunares = ["Albert-Camus.png", "Adorno.png", "Benjamin.png", "Byung-Chol-Han.png", "Carl-Jung.png", "Emil-Cioran.png", "Fernando-Pessoa.png", "Foucault.png", "Freud.png", "Georges-Bataille.png", "Gilles-Deleuze.png", "Guy-Debord.png", "Hannah-Arendt.png", "Heidegger.png", "Heraclito.png", "Huizinga.png", "Hume.png", "Jacques-Derrida.png", "John-Gray.png", "Kierkegaard.png", "Lucrecio.png", "Ludwig-Wittgenstein.png", "Nietzsche.png", "Pascal.png", "Peter-Zapfee.png", "Santo-Agostinho.png", "Sartre.png", "Schopenhauer.png", "Unamuno.png", "Vilém-Flusser.png"];
 const filosofosSolares = ["Aristoteles.png", "Bernard Suits.png", "Bostrom.png", "Buno Latour.png", "Cicero.png", "Comte.png", "Descartes.png", "Durkheim.png", "Francis Bacon.png", "Habermas.png", "Harari.png", "Hegel.png", "John Nash.png", "Kant.png", "Leibniz.png", "Locke.png", "Marx.png", "Mill.png", "Montesquieu.png", "Pitagoras.png", "Platao.png", "Roger Caillois.png", "Rousseau.png", "Sloterdijk.png", "Socrates.png", "Spinoza.png", "Steve Bannon.png", "Thomas Schelling.png", "Tomas de Aquino.png", "Weber.png"];
 
 let lunarSorteado = "";
@@ -426,6 +426,11 @@ async function gerarConfrontoIA() {
       statusEl.style.color = "#00cc66";
       statusEl.style.fontWeight = "500";
 
+      // --- INICIA MÚSICA DE FUNDO AQUI ---
+      // Toca darren_curtis.mp3 quando o conteúdo é gerado e exibido
+      memoriesAudio.play().catch(e => console.log("Erro ao tocar música (interação do usuário pode ser necessária):", e));
+      // ------------------------------------
+
       // Carregar o anúncio novamente
       try {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -471,7 +476,7 @@ function shareOnWhatsApp() {
       texto = texto.substring(0, 2000) + "...";
   }
 
-  const title = "Allora (re)Narrar";
+  const title = "Allora (re)Narrar — Seu Assistente de IA";
   const WHATSAPP_FOOTER = "\n\n🔮 Allora (re)Narrar — IA do Conhecimento\n⚡ Powered by Geraldo A. Seabra";
   const message = `✨ ${title}\n\n${texto}${WHATSAPP_FOOTER}`;
 
@@ -493,5 +498,3 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
-
-
