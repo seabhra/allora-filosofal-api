@@ -160,7 +160,7 @@ padding: 10px;
 width: 100%;
 border-radius: 10px;
 display: block;
-text-align: justify;
+text-align: left;
 }
 
 #aiBox {
@@ -262,10 +262,9 @@ border: 1px solid #ddd;
 const shuffleAudio = new Audio('audio_app/slots_machine.mp3');
 shuffleAudio.preload = 'auto';
 
-const memoriesAudio = new Audio('audio_app/memories_fundo.mp3');     
+const memoriesAudio = new Audio('audio_app/darren_curtis.mp3');     
 memoriesAudio.loop = true;
 memoriesAudio.preload = 'auto';
-
 // Configura volume (opcional, recomendado para não assustar o usuário)
 memoriesAudio.volume = 0.5;
 shuffleAudio.volume = 0.5;
@@ -276,7 +275,17 @@ const filosofosSolares = ["Aristoteles.png", "Bernard Suits.png", "Bostrom.png",
 
 let lunarSorteado = "";
 let solarSorteado = "";
-
+   // --- FUNÇÃO PARA PARAR TODOS OS ÁUDIOS ---
+        function pararAudios() {
+            if(memoriesAudio) {
+                memoriesAudio.pause();
+                memoriesAudio.currentTime = 0;
+            }
+            if(shuffleAudio) {
+                shuffleAudio.pause();
+                shuffleAudio.currentTime = 0;
+            }
+        }
 // Carregar temas do JSON
 fetch("https://raw.githubusercontent.com/seabhra/allora-filosofal-api/main/temas_filosoficos.json")
 .then(res => res.json())
@@ -484,4 +493,5 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
