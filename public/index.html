@@ -200,7 +200,14 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
   line-height: 1.2;
   text-align: center;
 }
-
+.texto-escolha {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #444;
+}
+  
 /* ÁREA DO JOGO */
 
 #jogoArea {
@@ -377,6 +384,9 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 
       
         <div id="areaBotaoAcao">
+  
+  <p class="texto-escolha">Escolha uma das opções...</p>
+
   <div class="grupo-botoes-sorteio">
 
     <button class="btn-sorteio btn-lunar" onclick="sortearLunarSolar()">
@@ -671,6 +681,7 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
 
 
