@@ -111,55 +111,59 @@ color: white; font-size: 16px; transition: transform 0.2s ease;
 .verde { background: #5ae9e9; color: #1a1a1a; } 
 
 /* CSS HARMONIZADO PARA O GRUPO DE BOTÕES */
-/* GRUPO */
+
+  /* CONTAINER */
 .grupo-botoes-sorteio {
   display: flex;
-  gap: 16px;                /* reduz espaço excessivo */
-  padding: 12px 16px;       /* padding mais equilibrado */
+  gap: 12px;                /* espaço mínimo entre eles */
+  padding: 12px;
   border: 4px solid #5989eb;
   border-radius: 20px;
   justify-content: center;
   align-items: stretch;     /* força mesma altura */
   width: fit-content;
   margin: 20px auto;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,0.08);
 }
 
 /* BOTÕES */
 .btn-sorteio {
   background: transparent;
   border: none;
-  padding: 10px 14px;       /* padding interno equilibrado */
-  min-height: 150px;        /* altura uniforme */
+
+  margin: 0;               /* remove qualquer margem */
+  padding: 0;              /* zera padding */
+
+  width: 140px;            /* mesma largura fixa */
+  height: 160px;           /* mesma altura fixa */
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; /* centraliza vertical */
   align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: transform 0.2s ease, filter 0.2s ease;
-}
 
-.btn-sorteio:active {
-  transform: scale(0.95);
-  filter: brightness(0.9);
+  cursor: pointer;
 }
 
 /* IMAGEM */
 .icone-botao {
-  width: 100px;             /* padroniza visual */
-  height: auto;
+  width: 100px;
+  height: 60px;            /* força mesma proporção visual */
+  object-fit: contain;
+  margin: 0;               /* remove espaço invisível */
+  padding: 0;
   display: block;
-  filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.2));
 }
 
-/* LABEL VISÍVEL */
+/* LABEL */
 .label-botao {
-  display: block;           /* agora aparece */
+  margin-top: 8px;
   font-size: 13px;
   font-weight: 600;
+  line-height: 1;          /* remove espaço vertical extra */
   color: #333;
 }
+  
   /* AREA DO JOGO*/
   #jogoArea {
 display: none;
@@ -290,8 +294,7 @@ border: 1px solid #ddd;
         <div class="grupo-botoes-sorteio">        
           <button class="btn-sorteio"
         onclick="sortearLunarSolar()"
-        style="height: 120px; padding-top: 20px; padding-bottom: 20px;">
-        <img src="/public/imagens_app/btn_um.png" alt="Lunar/Solar" class="icone-botao">
+             <img src="/public/imagens_app/btn_um.png" alt="Lunar/Solar" class="icone-botao">
         <span class="label-botao">Lunar/Solar</span>
           </button>
             <button class="btn-sorteio" onclick="sortearTodos()">
@@ -580,5 +583,6 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
 
