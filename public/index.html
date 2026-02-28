@@ -116,7 +116,7 @@ color: white; font-size: 16px; transition: transform 0.2s ease;
   gap: 20px; /* Espaço entre os dois botões de imagem */
   padding: 15px;
   /* Borda rosa envolvendo o grupo todo */
-  border: 2px solid #ff4081; 
+  border: 4px solid #5989eb; 
   border-radius: 20px;
   justify-content: center;
   align-items: center;
@@ -295,13 +295,13 @@ border: 1px solid #ddd;
 
     <div id="areaBotaoAcao">
         <div class="grupo-botoes-sorteio">
-            <button class="btn-sorteio" onclick="sortearLunarSolar()">
-              <!-- Aumente ou diminua o width no CSS se necessário -->
-              <img src="/public/imagens_app/btn_um.png" alt="Lunar/Solar" class="icone-botao">
-              <!-- Se quiser o texto embaixo da imagem, remova o "display:none" do CSS .label-botao -->
-              <span class="label-botao">Lunar/Solar</span>
-            </button>
-          
+        
+          <button class="btn-sorteio"
+        onclick="sortearLunarSolar()"
+        style="height: 120px; padding-top: 20px; padding-bottom: 20px;">
+        <img src="/public/imagens_app/btn_um.png" alt="Lunar/Solar" class="icone-botao">
+        <span class="label-botao">Lunar/Solar</span>
+          </button>
             <button class="btn-sorteio" onclick="sortearTodos()">
               <img src="/public/imagens_app/btn_todos.png" alt="Todos" class="icone-botao">
               <span class="label-botao">Todos/Todos</span>
@@ -588,3 +588,4 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
