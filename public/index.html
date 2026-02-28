@@ -110,38 +110,64 @@ color: white; font-size: 16px; transition: transform 0.2s ease;
 .azul-info { background: #4caedf; cursor: default; color: white; } 
 .verde { background: #5ae9e9; color: #1a1a1a; } 
 
-/* CSS DO GRUPO DE BOTÕES (Solicitação do Usuário) */
+/* CSS HARMONIZADO PARA O GRUPO DE BOTÕES */
 .grupo-botoes-sorteio {
   display: flex;
-  gap: 12px;
-  padding: 16px;
-  border: 2px solid #ff4081;
+  gap: 20px; /* Espaço entre os dois botões de imagem */
+  padding: 15px;
+  /* Borda rosa envolvendo o grupo todo */
+  border: 2px solid #ff4081; 
   border-radius: 20px;
   justify-content: center;
   align-items: center;
   width: fit-content;
   margin: 20px auto;
+  /* Fundo leve opcional para contrastar com a página, pode remover se quiser total transparência */
+  background: rgba(255, 255, 255, 0.1); 
 }
 
 .btn-sorteio {
+  /* Remove o fundo rosa e bordas padrão do botão */
+  background: transparent;
+  border: none;
+  padding: 0; /* Remove padding para a imagem preencher o espaço */
+  width: auto; /* Largura automática baseada na imagem */
+  border-radius: 0;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 12px 18px;
-  border-radius: 16px;
+  gap: 8px;
+  cursor: pointer;
+  /* Efeito suave ao passar o mouse */
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
+/* Efeito de "press" ao clicar na imagem */
+.btn-sorteio:active {
+  transform: scale(0.95);
+  filter: brightness(0.9);
+}
+
+/* Estilo da Imagem PNG */
 .icone-botao {
-  width: 40px;
+  /* Ajuste a largura aqui! Se suas imagens forem grandes, diminua (ex: 100px). 
+     Se forem pequenas, aumente. */
+  width: 110px; 
   height: auto;
+  display: block;
+  /* Sombra suave para dar profundidade à imagem */
+  filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.25));
 }
 
 .label-botao {
-  font-size: 14px;
+  display: none; /* OCULTA O TEXTO: Se a imagem já tiver texto escrito, mantenha assim. 
+                    Se a imagem for só um ícone e você quiser o texto embaixo, apague esta linha. */
+  
+  font-size: 12px;
   font-weight: 600;
+  color: #333; /* Cor do texto caso resolva mostrar */
 }
-/* FIM DO CSS DOS BOTÕES */
 
 #jogoArea {
 display: none;
@@ -253,7 +279,6 @@ border: 1px solid #ddd;
         <div class="card-container">
             <div class="card">
                 <img id="fotoLunar" src="imagens_app/lunares.png">
-                <!-- Adicionei ID aqui para poder mudar o texto dinamicamente -->
                 <div id="labelCardEsquerda" class="label-card">Lunares: desconfiam!</div>
             </div>
             <div id="nomeLunar" class="nome-filosofo">Prontos para duelar...</div>
@@ -262,7 +287,6 @@ border: 1px solid #ddd;
         <div class="card-container">
             <div class="card">
                 <img id="fotoSolar" src="imagens_app/solares.png">
-                <!-- Adicionei ID aqui para poder mudar o texto dinamicamente -->
                 <div id="labelCardDireita" class="label-card">Solares: prometem!</div>
             </div>
             <div id="nomeSolar" class="nome-filosofo">Prontos para duelar...</div>
@@ -270,14 +294,15 @@ border: 1px solid #ddd;
     </div>
 
     <div id="areaBotaoAcao">
-        <!-- HTML DOS BOTÕES ORGANIZADO PARA PEGAR O CSS CORRETO -->
         <div class="grupo-botoes-sorteio">
-            <button class="btn-aurora rosa btn-sorteio" onclick="sortearLunarSolar()">
+            <button class="btn-sorteio" onclick="sortearLunarSolar()">
+              <!-- Aumente ou diminua o width no CSS se necessário -->
               <img src="/public/imagens_app/btn_um.png" alt="Lunar/Solar" class="icone-botao">
+              <!-- Se quiser o texto embaixo da imagem, remova o "display:none" do CSS .label-botao -->
               <span class="label-botao">Lunar/Solar</span>
             </button>
           
-            <button class="btn-aurora rosa btn-sorteio" onclick="sortearTodos()">
+            <button class="btn-sorteio" onclick="sortearTodos()">
               <img src="/public/imagens_app/btn_todos.png" alt="Todos" class="icone-botao">
               <span class="label-botao">Todos/Todos</span>
             </button>
@@ -353,12 +378,10 @@ function iniciarDuelo() {
 
 // ---------------- FUNÇÕES DE SORTEIO ----------------
 
-// Função 1: Apenas Lunares vs Solares
 function sortearLunarSolar() {
   sortear('lunar_solar');
 }
 
-// Função 2: Todos contra Todos
 function sortearTodos() {
   sortear('todos');
 }
@@ -387,33 +410,25 @@ function sortear(modo) {
       let labelEsq = "Lunares: desconfiam!";
       let labelDir = "Solares: prometem!";
 
-      // Lógica do Modo
       if (modo === 'todos') {
-          // Sorteia qualquer filósofo para qualquer lado
           tempL = todosFilosofos[Math.floor(Math.random() * todosFilosofos.length)];
           tempS = todosFilosofos[Math.floor(Math.random() * todosFilosofos.length)];
           labelEsq = "Universo Filosófico";
           labelDir = "Universo Filosófico";
       } else {
-          // Modo Padrão: Lunar (Esquerda) vs Solar (Direita)
           tempL = filosofosLunares[Math.floor(Math.random() * filosofosLunares.length)];
           tempS = filosofosSolares[Math.floor(Math.random() * filosofosSolares.length)];
       }
 
-      // Atualização Visual durante animação
-      // Para o modo 'todos', usamos uma pasta padrão ou verificamos se é lunar/solar para achar a imagem
-      // Como não sabemos a pasta exata na animação rápida, usamos as pastas originais se possível
-      // Se o random for solar na esquerda, tentamos buscar na pasta solar
-      let srcL = "imagens_lunares_png/" + tempL; // fallback
+      let srcL = "imagens_lunares_png/" + tempL;
       if (filosofosSolares.includes(tempL)) srcL = "imagens_solares_png/" + tempL;
       
-      let srcS = "imagens_solares_png/" + tempS; // fallback
+      let srcS = "imagens_solares_png/" + tempS;
       if (filosofosLunares.includes(tempS)) srcS = "imagens_lunares_png/" + tempS;
 
       document.getElementById('fotoLunar').src = srcL;
       document.getElementById('fotoSolar').src = srcS;
       
-      // Atualiza os labels (Títulos dos cards)
       document.getElementById('labelCardEsquerda').innerText = labelEsq;
       document.getElementById('labelCardDireita').innerText = labelDir;
 
@@ -427,7 +442,6 @@ function sortear(modo) {
           lunarSorteado = tempL.replace('.png', '');
           solarSorteado = tempS.replace('.png', '');
 
-          // Garante que a imagem final esteja correta
           document.getElementById('fotoLunar').src = srcL;
           document.getElementById('fotoSolar').src = srcS;
           
