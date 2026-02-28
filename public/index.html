@@ -37,7 +37,7 @@ min-height: 100vh;
 }
 
 #pageLoader {
-position: fixed; inset: 0; background: #fdfcfd; /* Fundo branco/claro */
+position: fixed; inset: 0; background: #fdfcfd;
 z-index: 9999; display: flex; align-items: center; justify-content: center;
 }
 
@@ -48,10 +48,9 @@ border-top: 6px solid #d847cf; border-radius: 50%; animation: spin 1.5s linear i
 
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-/* Container Principal para garantir centralização e largura consistente */
 .app-container {
 width: 100%;
-max-width: 360px; /* Mesma largura do menu inicial */
+max-width: 360px;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -68,7 +67,7 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
 #erroTema {
-color: #ffeb3b; /* Amarelo para contraste melhor no fundo roxo */
+color: #ffeb3b;
 font-size: 12px;
 font-weight: bold;
 display: none;
@@ -111,6 +110,7 @@ color: white; font-size: 16px; transition: transform 0.2s ease;
 .azul-info { background: #4caedf; cursor: default; color: white; } 
 .verde { background: #5ae9e9; color: #1a1a1a; } 
 
+/* CSS DO GRUPO DE BOTÕES (Solicitação do Usuário) */
 .grupo-botoes-sorteio {
   display: flex;
   gap: 12px;
@@ -141,6 +141,7 @@ color: white; font-size: 16px; transition: transform 0.2s ease;
   font-size: 14px;
   font-weight: 600;
 }
+/* FIM DO CSS DOS BOTÕES */
 
 #jogoArea {
 display: none;
@@ -185,7 +186,7 @@ line-height: 1.1; font-weight: bold;
 #status {
 margin: 15px auto;
 font-size: 13px;
-color: #555; /* Texto escuro para leitura no fundo claro */
+color: #555;
 background: rgba(255,255,255,0.8);
 padding: 10px;
 width: 100%;
@@ -252,6 +253,7 @@ border: 1px solid #ddd;
         <div class="card-container">
             <div class="card">
                 <img id="fotoLunar" src="imagens_app/lunares.png">
+                <!-- Adicionei ID aqui para poder mudar o texto dinamicamente -->
                 <div id="labelCardEsquerda" class="label-card">Lunares: desconfiam!</div>
             </div>
             <div id="nomeLunar" class="nome-filosofo">Prontos para duelar...</div>
@@ -260,6 +262,7 @@ border: 1px solid #ddd;
         <div class="card-container">
             <div class="card">
                 <img id="fotoSolar" src="imagens_app/solares.png">
+                <!-- Adicionei ID aqui para poder mudar o texto dinamicamente -->
                 <div id="labelCardDireita" class="label-card">Solares: prometem!</div>
             </div>
             <div id="nomeSolar" class="nome-filosofo">Prontos para duelar...</div>
@@ -267,20 +270,19 @@ border: 1px solid #ddd;
     </div>
 
     <div id="areaBotaoAcao">
-
+        <!-- HTML DOS BOTÕES ORGANIZADO PARA PEGAR O CSS CORRETO -->
         <div class="grupo-botoes-sorteio">
-            <!-- Botão 1: Sorteio Lunares vs Solares -->
             <button class="btn-aurora rosa btn-sorteio" onclick="sortearLunarSolar()">
               <img src="/public/imagens_app/btn_um.png" alt="Lunar/Solar" class="icone-botao">
               <span class="label-botao">Lunar/Solar</span>
             </button>
           
-            <!-- Botão 2: Sorteio Todos contra Todos -->
             <button class="btn-aurora rosa btn-sorteio" onclick="sortearTodos()">
               <img src="/public/imagens_app/btn_todos.png" alt="Todos" class="icone-botao">
               <span class="label-botao">Todos/Todos</span>
             </button>
         </div>
+    </div>
 
     <div id="status">Prepara-se... Em jogo a grande batalha do pensamento humano sem viés passional. Agora é a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram — e que você ainda assume como seus. Jogue sem dó e mate o que está te matando: a mentira intencional por mais poder político, econômico e religioso. Quando jogar também é ler.</div>
 
@@ -309,7 +311,6 @@ const memoriesAudio = new Audio('audio_app/memories_fundo.mp3');
 memoriesAudio.loop = true;
 memoriesAudio.preload = 'auto';
 
-// Configura volume
 memoriesAudio.volume = 0.5;
 shuffleAudio.volume = 0.5;
 
@@ -317,7 +318,7 @@ shuffleAudio.volume = 0.5;
 const filosofosLunares = ["Albert-Camus.png", "Adorno.png", "Benjamin.png", "Byung-Chul-Han.png", "Carl-Jung.png", "Emil-Cioran.png", "Fernando-Pessoa.png", "Foucault.png", "Freud.png", "Georges-Bataille.png", "Gilles-Deleuze.png", "Guy-Debord.png", "Hannah-Arendt.png", "Heidegger.png", "Heraclito.png", "Huizinga.png", "Hume.png", "Jacques-Derrida.png", "John-Gray.png", "Kierkegaard.png", "Lucrecio.png", "Ludwig-Wittgenstein.png", "Nietzsche.png", "Pascal.png", "Peter-Zapfee.png", "Santo-Agostinho.png", "Sartre.png", "Schopenhauer.png", "Unamuno.png", "Vilém-Flusser.png"];
 const filosofosSolares = ["Aristoteles.png", "Bernard Suits.png", "Bostrom.png", "Buno Latour.png", "Cicero.png", "Comte.png", "Descartes.png", "Durkheim.png", "Francis Bacon.png", "Habermas.png", "Harari.png", "Hegel.png", "John Nash.png", "Kant.png", "Leibniz.png", "Locke.png", "Marx.png", "Mill.png", "Montesquieu.png", "Pitagoras.png", "Platao.png", "Roger Caillois.png", "Rousseau.png", "Sloterdijk.png", "Socrates.png", "Spinoza.png", "Steve Bannon.png", "Thomas Schelling.png", "Tomas de Aquino.png", "Weber.png"];
 
-// Criar lista unificada de todos
+// Lista única com todos os filósofos
 const todosFilosofos = [...filosofosLunares, ...filosofosSolares];
 
 let lunarSorteado = "";
@@ -345,7 +346,6 @@ function iniciarDuelo() {
   }
   erroEl.style.display = 'none';
   
-  // Troca de telas
   document.getElementById('menuInicial').style.display = 'none';
   document.getElementById('jogoArea').style.display = 'flex';
   document.getElementById('containerFilosofos').style.display = 'flex';
@@ -353,39 +353,33 @@ function iniciarDuelo() {
 
 // ---------------- FUNÇÕES DE SORTEIO ----------------
 
-// 1. Sorteio apenas Lunares vs Solares (Original)
+// Função 1: Apenas Lunares vs Solares
 function sortearLunarSolar() {
   sortear('lunar_solar');
 }
 
-// 2. Sorteio de Todos contra Todos (Qualquer um contra Qualquer um)
+// Função 2: Todos contra Todos
 function sortearTodos() {
   sortear('todos');
 }
 
 function sortear(modo) {
-  // Resetar áudios
   memoriesAudio.pause();
   memoriesAudio.currentTime = 0;
   shuffleAudio.currentTime = 0;
   
-  // Tocar som de shuffle
   shuffleAudio.play().catch(e => console.log("Interagir primeiro para tocar som"));
 
-  // Atualiza status
-  document.getElementById('status').innerText = "No Conclave das Metanarrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes com pouco controle institucional.";
+  document.getElementById('status').innerText = "Sorteando combatentes...";
   
-  // Desabilita botões durante animação
   const areaBotao = document.getElementById('areaBotaoAcao');
   areaBotao.innerHTML = `<button class="btn-aurora azul-info">Clássicos em combate...</button>`;
 
-  // Ocultar resultado anterior
   const aiBox = document.getElementById('aiBox');
   if(aiBox.style.display === 'block') {
       aiBox.style.display = 'none';
   }
 
-  // Lógica da animação
   let ciclos = 0;
   const intervalo = setInterval(() => {
       
@@ -393,23 +387,33 @@ function sortear(modo) {
       let labelEsq = "Lunares: desconfiam!";
       let labelDir = "Solares: prometem!";
 
+      // Lógica do Modo
       if (modo === 'todos') {
-          // Sorteia qualquer um para os dois lados
+          // Sorteia qualquer filósofo para qualquer lado
           tempL = todosFilosofos[Math.floor(Math.random() * todosFilosofos.length)];
           tempS = todosFilosofos[Math.floor(Math.random() * todosFilosofos.length)];
           labelEsq = "Universo Filosófico";
           labelDir = "Universo Filosófico";
       } else {
-          // Modo padrão: Lunar vs Solar
+          // Modo Padrão: Lunar (Esquerda) vs Solar (Direita)
           tempL = filosofosLunares[Math.floor(Math.random() * filosofosLunares.length)];
           tempS = filosofosSolares[Math.floor(Math.random() * filosofosSolares.length)];
       }
 
-      // Atualiza imagens e labels na animação
-      document.getElementById('fotoLunar').src = "imagens_lunares_png/" + tempL; // Note: se sortear solar no modo 'todos', pode precisar ajustar a pasta, mas mantemos simple
-      document.getElementById('fotoSolar').src = "imagens_solares_png/" + tempS;
+      // Atualização Visual durante animação
+      // Para o modo 'todos', usamos uma pasta padrão ou verificamos se é lunar/solar para achar a imagem
+      // Como não sabemos a pasta exata na animação rápida, usamos as pastas originais se possível
+      // Se o random for solar na esquerda, tentamos buscar na pasta solar
+      let srcL = "imagens_lunares_png/" + tempL; // fallback
+      if (filosofosSolares.includes(tempL)) srcL = "imagens_solares_png/" + tempL;
       
-      // Atualiza labels dinamicamente
+      let srcS = "imagens_solares_png/" + tempS; // fallback
+      if (filosofosLunares.includes(tempS)) srcS = "imagens_lunares_png/" + tempS;
+
+      document.getElementById('fotoLunar').src = srcL;
+      document.getElementById('fotoSolar').src = srcS;
+      
+      // Atualiza os labels (Títulos dos cards)
       document.getElementById('labelCardEsquerda').innerText = labelEsq;
       document.getElementById('labelCardDireita').innerText = labelDir;
 
@@ -420,26 +424,12 @@ function sortear(modo) {
           clearInterval(intervalo);
           shuffleAudio.pause();
           
-          // Define os nomes finais
           lunarSorteado = tempL.replace('.png', '');
           solarSorteado = tempS.replace('.png', '');
 
-          // Ajuste visual final: se for modo todos, verifica se o sorteado é Lunar ou Solar para colocar a foto correta
-          if (modo === 'todos') {
-              // Verifica se o filósofo da esquerda é lunar ou solar para buscar a imagem na pasta correta
-              if (filosofosSolares.includes(tempL)) {
-                  document.getElementById('fotoLunar').src = "imagens_solares_png/" + tempL;
-              } else {
-                  document.getElementById('fotoLunar').src = "imagens_lunares_png/" + tempL;
-              }
-
-              // Verifica se o filósofo da direita é lunar ou solar
-              if (filosofosLunares.includes(tempS)) {
-                  document.getElementById('fotoSolar').src = "imagens_lunares_png/" + tempS;
-              } else {
-                  document.getElementById('fotoSolar').src = "imagens_solares_png/" + tempS;
-              }
-          }
+          // Garante que a imagem final esteja correta
+          document.getElementById('fotoLunar').src = srcL;
+          document.getElementById('fotoSolar').src = srcS;
           
           gerarConfrontoIA();
       }
@@ -479,7 +469,6 @@ async function gerarConfrontoIA() {
       const respostaTexto = data.choices[0].message.content;
       const aiBox = document.getElementById('aiBox');
 
-      // Renderiza o conteúdo
       aiBox.innerHTML = `
         <h2 class="ai-title" style="color:#4a148c; margin-top:0; font-size:18px;">
           <img src="public/imagens_app/logo_circular.png" class="ai-logo" style="width:25px; vertical-align:middle; margin-right:8px;">
@@ -519,7 +508,6 @@ async function gerarConfrontoIA() {
       statusEl.style.color = "#00cc66";
       statusEl.style.fontWeight = "500";
 
-      // Carregar o anúncio novamente
       try {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
       } catch (e) {
@@ -586,5 +574,3 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
-
-
