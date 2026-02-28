@@ -23,124 +23,149 @@ crossorigin="anonymous"></script>
 * { box-sizing: border-box; }
 
 body {
-margin: 0;
-padding: 10px;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-background: #fdfcfd;
-color: white;
-text-align: center;
-overflow-x: hidden;
-display: flex;
-justify-content: center; 
-align-items: center; 
-min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fdfcfd;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
 }
 
+/* LOADER */
+
 #pageLoader {
-position: fixed; inset: 0; background: #fdfcfd;
-z-index: 9999; display: flex; align-items: center; justify-content: center;
+  position: fixed;
+  inset: 0;
+  background: #fdfcfd;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .loader-circle {
-width: 60px; height: 60px; border: 6px solid #e0e0e0;
-border-top: 6px solid #d847cf; border-radius: 50%; animation: spin 1.5s linear infinite;
+  width: 60px;
+  height: 60px;
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #d847cf;
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
 }
 
-@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* APP CONTAINER */
 
 .app-container {
-width: 100%;
-max-width: 370px;
-display: flex;
-flex-direction: column;
-align-items: center;
+  width: 100%;
+  max-width: 370px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
 }
 
+/* MENU */
+
 .menu-caixa {
-background: rgba(69, 89, 222, 0.9);
-backdrop-filter: blur(6px);
-color: #333;
-padding: 20px 15px;
-border-radius: 20px;
-width: 100%;
-box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  background: rgba(69, 89, 222, 0.9);
+  backdrop-filter: blur(6px);
+  color: #333;
+  padding: 14px 12px;
+  border-radius: 18px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
 }
 
 #erroTema {
-color: #ffeb3b;
-font-size: 12px;
-font-weight: bold;
-display: none;
-margin-bottom: 10px;
+  color: #ffeb3b;
+  font-size: 12px;
+  font-weight: bold;
+  display: none;
+  margin-bottom: 8px;
 }
 
+/* IMAGENS */
+
 .img-espadas {
-display: block;
-margin: -40px auto 10px; 
-width: 100%;
-max-width: 260px;
-aspect-ratio: 1 / 1;
-object-fit: contain;
+  display: block;
+  margin: -30px auto 6px;
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
 }
 
 .img-versus-central {
-width: 40px;
-height: 40px;
-align-self: center;
-object-fit: contain;
-margin: -10px 5px; 
+  width: 36px;
+  height: 36px;
+  align-self: center;
+  object-fit: contain;
+  margin: -6px 4px;
 }
 
+/* SELECT */
+
 .seletor-tema {
-width: 100%; padding: 12px; margin: 10px 0;
-border-radius: 12px; border: 2px solid #9d5fe9;
-background: white; font-weight: bold; color: #4a148c;
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 12px;
+  border: 2px solid #9d5fe9;
+  background: white;
+  font-weight: bold;
+  color: #4a148c;
 }
+
+/* BOTÕES */
 
 .btn-aurora {
   width: 100%;
-  padding: 12px;
-  margin-top: 1px;      /* margem superior */
-  margin-bottom: 10px;    /* margem inferior */
+  padding: 10px;
+  margin: 4px 0;
   border: none;
-  border-radius: 16px;
+  border-radius: 14px;
   font-weight: bold;
   cursor: pointer;
   color: white;
-  font-size: 16px;
+  font-size: 15px;
   transition: transform 0.2s ease;
 }
 
 .btn-aurora:active { transform: scale(0.97); }
 
-.roxo { background: #98df4c; color: #1a1a1a; } 
+.roxo { background: #98df4c; color: #1a1a1a; }
 .rosa { background: #f49bb9; color: #1a1a1a; }
-.azul-info { background: #4caedf; cursor: default; color: white; } 
-.verde { background: #5ae9e9; color: #1a1a1a; } 
+.azul-info { background: #4caedf; cursor: default; color: white; }
+.verde { background: #5ae9e9; color: #1a1a1a; }
 
-/* CSS HARMONIZADO PARA O GRUPO DE BOTÕES */
- /* CONTAINER */
- 
+/* GRUPO SORTEIO */
+
 .grupo-botoes-sorteio {
   display: flex;
   border-radius: 12px;
   border: 2px solid #5f86e9;
-  gap: 12px;
+  gap: 10px;
   justify-content: center;
   align-items: center;
-  padding: 8px;
-
-  margin-top: 5px;     /* margem superior */
-  margin-bottom: 5px;  /* margem inferior */
+  padding: 6px;
+  margin: 4px 0;
 }
 
-/* BOTÕES */
 .btn-sorteio {
-  width: 150px;
-  height: 75px; 
+  width: 140px;
+  height: 70px;
   background: transparent;
   border: none;
-  padding: 0;          /* Remove paddings que podem variar */
+  padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -148,118 +173,163 @@ background: white; font-weight: bold; color: #4a148c;
   cursor: pointer;
 }
 
-/* IMAGENS (O segredo da harmonização) */
-/* IMAGEM LUNAR */
 .icone-lunar {
-  width: 100px;
-  height: 75px;       /* ajuste específico para essa */
+  width: 90px;
+  height: 70px;
   object-fit: contain;
   display: block;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
-/* IMAGEM TODOS */
 .icone-todos {
-  width: 100px;
-  height: 55px;       /* ajuste específico diferente */
+  width: 90px;
+  height: 50px;
   object-fit: contain;
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
-/* LABEL */
 .label-botao {
-  margin: 0;           /* Remove margens automáticas */
-  font-size: 13px;
+  margin: 0;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.2;
   text-align: center;
 }
-  
-  /* AREA DO JOGO*/
-  #jogoArea {
-display: none;
-width: 100%;
-flex-direction: column;
-align-items: center;
+
+/* ÁREA DO JOGO */
+
+#jogoArea {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
 }
+
+/* CARDS */
 
 .cards-area {
-display: none; justify-content: center; gap: 5px;
-margin: 10px auto 20px; padding: 10px; background: rgba(255,255,255,0.2);
-border-radius: 20px; flex-wrap: nowrap;
-align-items: center;
-width: 100%;
+  display: none;
+  justify-content: center;
+  gap: 6px;
+  margin: 6px auto 12px;
+  padding: 6px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 18px;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
 }
 
-.card-container { width: 48%; height: 220px; display: flex; flex-direction: column; align-items: center;}
+.card-container {
+  width: 48%;
+  height: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .card {
-width: 100%; height: 190px; background: #1a1a1a;
-border-radius: 12px; border: 3px solid #fff; overflow: hidden;
-box-shadow: 0 4px 15px rgba(0,0,0,0.5); position: relative;
-margin-bottom: 5px;
+  width: 100%;
+  height: 180px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  border: 3px solid #fff;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.45);
+  position: relative;
+  margin-bottom: 4px;
 }
 
-.card img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
 
 .label-card {
-position: absolute; top: 0; width: 100%; background: rgba(0,0,0,0.7);
-color: #fff; font-size: 10px; padding: 2px; font-weight: bold;
-white-space: nowrap;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  font-size: 10px;
+  padding: 2px;
+  font-weight: bold;
+  white-space: nowrap;
 }
 
 .nome-filosofo {
-background: #638da3; color: white;
-font-size: 11px; padding: 4px; border-radius: 8px;
-width: 100%;
-min-height: 30px; display: flex; align-items: center; justify-content: center;
-line-height: 1.1; font-weight: bold;
+  background: #638da3;
+  color: white;
+  font-size: 11px;
+  padding: 4px;
+  border-radius: 8px;
+  width: 100%;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.1;
+  font-weight: bold;
 }
+
+/* STATUS */
 
 #status {
-margin: 15px auto;
-font-size: 13px;
-color: #555;
-background: rgba(255,255,255,0.8);
-padding: 10px;
-width: 100%;
-border-radius: 10px;
-display: block;
-text-align: justify;
+  margin: 8px auto;
+  font-size: 13px;
+  color: #555;
+  background: rgba(255,255,255,0.9);
+  padding: 8px;
+  width: 100%;
+  border-radius: 10px;
+  text-align: justify;
 }
+
+/* AI BOX */
 
 #aiBox {
-display: none;
-background: white;
-color: #333;
-padding: 15px;
-border-radius: 15px;
-text-align: left;
-margin: 15px 0;
-width: 100%;
-font-size: 14px;
-line-height: 1.5;
-box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-position: relative;
-border: 1px solid #eee;
+  display: none;
+  background: white;
+  color: #333;
+  padding: 12px;
+  border-radius: 14px;
+  text-align: left;
+  margin: 8px 0;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  position: relative;
+  border: 1px solid #eee;
 }
 
-.btn-zap-redondo { 
-position: absolute; top: -15px; right: -10px; 
-width: 45px; height: 45px; 
-cursor: pointer; z-index: 10; 
-transition: transform 0.2s;
+.btn-zap-redondo {
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s;
 }
-.btn-zap-redondo:hover { transform: scale(1.1); }
+
+.btn-zap-redondo:hover {
+  transform: scale(1.1);
+}
+
+/* ADS */
 
 #ad-container {
-margin-top: 20px;
-min-height: 100px;
-background-color: #f9f9f9;
-border-radius: 8px;
-padding: 5px;
-border: 1px solid #ddd;
+  margin-top: 12px;
+  min-height: 90px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 5px;
+  border: 1px solid #ddd;
 }
 </style>
 </head>
@@ -597,6 +667,7 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
 
 
