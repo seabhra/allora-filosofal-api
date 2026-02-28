@@ -99,7 +99,7 @@ background: white; font-weight: bold; color: #4a148c;
 }
 
 .btn-aurora {
-width: 100%; padding: 12px; margin: 2px 0 2px 0; border: none;
+width: 100%; padding: 12px; margin: 6px 0; border: none;
 border-radius: 16px; font-weight: bold; cursor: pointer;
 color: white; font-size: 16px; transition: transform 0.2s ease;
 }
@@ -110,6 +110,37 @@ color: white; font-size: 16px; transition: transform 0.2s ease;
 .rosa { background: #f49bb9; color: #1a1a1a; }
 .azul-info { background: #4caedf; cursor: default; color: white; } 
 .verde { background: #5ae9e9; color: #1a1a1a; } 
+
+.grupo-botoes-sorteio {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  border: 2px solid #ff4081;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin: 20px auto;
+}
+
+.btn-sorteio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 18px;
+  border-radius: 16px;
+}
+
+.icone-botao {
+  width: 40px;
+  height: auto;
+}
+
+.label-botao {
+  font-size: 14px;
+  font-weight: 600;
+}
 
 #jogoArea {
 display: none;
@@ -152,7 +183,7 @@ line-height: 1.1; font-weight: bold;
 }
 
 #status {
-margin: 5px 0 5px 0;
+margin: 15px auto;
 font-size: 13px;
 color: #555; /* Texto escuro para leitura no fundo claro */
 background: rgba(255,255,255,0.8);
@@ -160,7 +191,7 @@ padding: 10px;
 width: 100%;
 border-radius: 10px;
 display: block;
-text-align: left;
+text-align: justify;
 }
 
 #aiBox {
@@ -212,7 +243,7 @@ border: 1px solid #ddd;
     <div id="erroTema">⚠️ Por favor, escolha um tema antes de iniciar!</div>
     <input list="temasFilosoficos" id="seletorTema" class="seletor-tema" placeholder="Escreva seu próprio tema...">
     <datalist id="temasFilosoficos"></datalist>
-    <button onclick="iniciarDuelo()" class="btn-aurora roxo">⚔️ Bora (re)Narrar</button>
+    <button onclick="iniciarDuelo()" class="btn-aurora roxo">⚔️ Bora Demolir Narrativas Falsas</button>
   </div>
 
   <!-- ÁREA DE JOGO -->
@@ -221,7 +252,7 @@ border: 1px solid #ddd;
         <div class="card-container">
             <div class="card">
                 <img id="fotoLunar" src="imagens_app/lunares.png">
-                <div class="label-card">Lunares: desconfiam!</div>
+                <div id="labelCardEsquerda" class="label-card">Lunares: desconfiam!</div>
             </div>
             <div id="nomeLunar" class="nome-filosofo">Prontos para duelar...</div>
         </div>
@@ -229,15 +260,27 @@ border: 1px solid #ddd;
         <div class="card-container">
             <div class="card">
                 <img id="fotoSolar" src="imagens_app/solares.png">
-                <div class="label-card">Solares: prometem!</div>
+                <div id="labelCardDireita" class="label-card">Solares: prometem!</div>
             </div>
             <div id="nomeSolar" class="nome-filosofo">Prontos para duelar...</div>
         </div>
     </div>
 
     <div id="areaBotaoAcao">
-        <button id="btnSorteio" class="btn-aurora rosa" onclick="sortear()">🃏Bora MetaNarrar Clássicos</button>
-    </div>
+
+        <div class="grupo-botoes-sorteio">
+            <!-- Botão 1: Sorteio Lunares vs Solares -->
+            <button class="btn-aurora rosa btn-sorteio" onclick="sortearLunarSolar()">
+              <img src="/public/imagens_app/btn_um.png" alt="Lunar/Solar" class="icone-botao">
+              <span class="label-botao">Lunar/Solar</span>
+            </button>
+          
+            <!-- Botão 2: Sorteio Todos contra Todos -->
+            <button class="btn-aurora rosa btn-sorteio" onclick="sortearTodos()">
+              <img src="/public/imagens_app/btn_todos.png" alt="Todos" class="icone-botao">
+              <span class="label-botao">Todos/Todos</span>
+            </button>
+        </div>
 
     <div id="status">Prepara-se... Em jogo a grande batalha do pensamento humano sem viés passional. Agora é a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram — e que você ainda assume como seus. Jogue sem dó e mate o que está te matando: a mentira intencional por mais poder político, econômico e religioso. Quando jogar também é ler.</div>
 
@@ -262,30 +305,24 @@ border: 1px solid #ddd;
 const shuffleAudio = new Audio('audio_app/slots_machine.mp3');
 shuffleAudio.preload = 'auto';
 
-const memoriesAudio = new Audio('audio_app/darren_curtis.mp3');     
+const memoriesAudio = new Audio('audio_app/memories_fundo.mp3');     
 memoriesAudio.loop = true;
 memoriesAudio.preload = 'auto';
-// Configura volume (opcional, recomendado para não assustar o usuário)
+
+// Configura volume
 memoriesAudio.volume = 0.5;
 shuffleAudio.volume = 0.5;
 
 // ---------------- DADOS E INICIALIZAÇÃO ----------------
-const filosofosLunares = ["Albert-Camus.png", "Adorno.png", "Benjamin.png", "Byung-Chol-Han.png", "Carl-Jung.png", "Emil-Cioran.png", "Fernando-Pessoa.png", "Foucault.png", "Freud.png", "Georges-Bataille.png", "Gilles-Deleuze.png", "Guy-Debord.png", "Hannah-Arendt.png", "Heidegger.png", "Heraclito.png", "Huizinga.png", "Hume.png", "Jacques-Derrida.png", "John-Gray.png", "Kierkegaard.png", "Lucrecio.png", "Ludwig-Wittgenstein.png", "Nietzsche.png", "Pascal.png", "Peter-Zapfee.png", "Santo-Agostinho.png", "Sartre.png", "Schopenhauer.png", "Unamuno.png", "Vilém-Flusser.png"];
+const filosofosLunares = ["Albert-Camus.png", "Adorno.png", "Benjamin.png", "Byung-Chul-Han.png", "Carl-Jung.png", "Emil-Cioran.png", "Fernando-Pessoa.png", "Foucault.png", "Freud.png", "Georges-Bataille.png", "Gilles-Deleuze.png", "Guy-Debord.png", "Hannah-Arendt.png", "Heidegger.png", "Heraclito.png", "Huizinga.png", "Hume.png", "Jacques-Derrida.png", "John-Gray.png", "Kierkegaard.png", "Lucrecio.png", "Ludwig-Wittgenstein.png", "Nietzsche.png", "Pascal.png", "Peter-Zapfee.png", "Santo-Agostinho.png", "Sartre.png", "Schopenhauer.png", "Unamuno.png", "Vilém-Flusser.png"];
 const filosofosSolares = ["Aristoteles.png", "Bernard Suits.png", "Bostrom.png", "Buno Latour.png", "Cicero.png", "Comte.png", "Descartes.png", "Durkheim.png", "Francis Bacon.png", "Habermas.png", "Harari.png", "Hegel.png", "John Nash.png", "Kant.png", "Leibniz.png", "Locke.png", "Marx.png", "Mill.png", "Montesquieu.png", "Pitagoras.png", "Platao.png", "Roger Caillois.png", "Rousseau.png", "Sloterdijk.png", "Socrates.png", "Spinoza.png", "Steve Bannon.png", "Thomas Schelling.png", "Tomas de Aquino.png", "Weber.png"];
+
+// Criar lista unificada de todos
+const todosFilosofos = [...filosofosLunares, ...filosofosSolares];
 
 let lunarSorteado = "";
 let solarSorteado = "";
-   // --- FUNÇÃO PARA PARAR TODOS OS ÁUDIOS ---
-        function pararAudios() {
-            if(memoriesAudio) {
-                memoriesAudio.pause();
-                memoriesAudio.currentTime = 0;
-            }
-            if(shuffleAudio) {
-                shuffleAudio.pause();
-                shuffleAudio.currentTime = 0;
-            }
-        }
+
 // Carregar temas do JSON
 fetch("https://raw.githubusercontent.com/seabhra/allora-filosofal-api/main/temas_filosoficos.json")
 .then(res => res.json())
@@ -314,40 +351,96 @@ function iniciarDuelo() {
   document.getElementById('containerFilosofos').style.display = 'flex';
 }
 
-function sortear() {
+// ---------------- FUNÇÕES DE SORTEIO ----------------
+
+// 1. Sorteio apenas Lunares vs Solares (Original)
+function sortearLunarSolar() {
+  sortear('lunar_solar');
+}
+
+// 2. Sorteio de Todos contra Todos (Qualquer um contra Qualquer um)
+function sortearTodos() {
+  sortear('todos');
+}
+
+function sortear(modo) {
   // Resetar áudios
   memoriesAudio.pause();
   memoriesAudio.currentTime = 0;
   shuffleAudio.currentTime = 0;
   
-  // Tocar som de shuffle (ignora erro se não houver interação do usuário ainda)
+  // Tocar som de shuffle
   shuffleAudio.play().catch(e => console.log("Interagir primeiro para tocar som"));
 
-  document.getElementById('status').innerText = "No Conclave das Metanarrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes com pouco controle institucional. Na arena dos Titãs do Pensamento, Allora (re)Narrar está armada até os dentes — uma IA treinada para barrar que discursos passionais sabotem qualquer conhecimento informado.";
+  // Atualiza status
+  document.getElementById('status').innerText = "No Conclave das Metanarrativas, 62 filósofos entre lunares e solares disputam mais de 2.500 anos de história intelectual. Agora a luta é contra o julgo das paixões narrativas induzidas nas redes com pouco controle institucional.";
   
+  // Desabilita botões durante animação
   const areaBotao = document.getElementById('areaBotaoAcao');
   areaBotao.innerHTML = `<button class="btn-aurora azul-info">Clássicos em combate...</button>`;
 
-  // Ocultar resultado anterior se houver
+  // Ocultar resultado anterior
   const aiBox = document.getElementById('aiBox');
   if(aiBox.style.display === 'block') {
       aiBox.style.display = 'none';
   }
 
+  // Lógica da animação
   let ciclos = 0;
   const intervalo = setInterval(() => {
-      const tempL = filosofosLunares[Math.floor(Math.random() * filosofosLunares.length)];
-      const tempS = filosofosSolares[Math.floor(Math.random() * filosofosSolares.length)];
-      document.getElementById('fotoLunar').src = "imagens_lunares_png/" + tempL;
+      
+      let tempL, tempS;
+      let labelEsq = "Lunares: desconfiam!";
+      let labelDir = "Solares: prometem!";
+
+      if (modo === 'todos') {
+          // Sorteia qualquer um para os dois lados
+          tempL = todosFilosofos[Math.floor(Math.random() * todosFilosofos.length)];
+          tempS = todosFilosofos[Math.floor(Math.random() * todosFilosofos.length)];
+          labelEsq = "Universo Filosófico";
+          labelDir = "Universo Filosófico";
+      } else {
+          // Modo padrão: Lunar vs Solar
+          tempL = filosofosLunares[Math.floor(Math.random() * filosofosLunares.length)];
+          tempS = filosofosSolares[Math.floor(Math.random() * filosofosSolares.length)];
+      }
+
+      // Atualiza imagens e labels na animação
+      document.getElementById('fotoLunar').src = "imagens_lunares_png/" + tempL; // Note: se sortear solar no modo 'todos', pode precisar ajustar a pasta, mas mantemos simple
       document.getElementById('fotoSolar').src = "imagens_solares_png/" + tempS;
+      
+      // Atualiza labels dinamicamente
+      document.getElementById('labelCardEsquerda').innerText = labelEsq;
+      document.getElementById('labelCardDireita').innerText = labelDir;
+
       document.getElementById('nomeLunar').innerText = tempL.replace('.png', '').replace(/-/g, ' ');
       document.getElementById('nomeSolar').innerText = tempS.replace('.png', '').replace(/-/g, ' ');
 
       if (ciclos++ > 100) {
           clearInterval(intervalo);
           shuffleAudio.pause();
+          
+          // Define os nomes finais
           lunarSorteado = tempL.replace('.png', '');
           solarSorteado = tempS.replace('.png', '');
+
+          // Ajuste visual final: se for modo todos, verifica se o sorteado é Lunar ou Solar para colocar a foto correta
+          if (modo === 'todos') {
+              // Verifica se o filósofo da esquerda é lunar ou solar para buscar a imagem na pasta correta
+              if (filosofosSolares.includes(tempL)) {
+                  document.getElementById('fotoLunar').src = "imagens_solares_png/" + tempL;
+              } else {
+                  document.getElementById('fotoLunar').src = "imagens_lunares_png/" + tempL;
+              }
+
+              // Verifica se o filósofo da direita é lunar ou solar
+              if (filosofosLunares.includes(tempS)) {
+                  document.getElementById('fotoSolar').src = "imagens_lunares_png/" + tempS;
+              } else {
+                  document.getElementById('fotoSolar').src = "imagens_solares_png/" + tempS;
+              }
+          }
+          
           gerarConfrontoIA();
       }
   }, 90);
@@ -426,11 +519,6 @@ async function gerarConfrontoIA() {
       statusEl.style.color = "#00cc66";
       statusEl.style.fontWeight = "500";
 
-      // --- INICIA MÚSICA DE FUNDO AQUI ---
-      // Toca darren_curtis.mp3 quando o conteúdo é gerado e exibido
-      memoriesAudio.play().catch(e => console.log("Erro ao tocar música (interação do usuário pode ser necessária):", e));
-      // ------------------------------------
-
       // Carregar o anúncio novamente
       try {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -476,7 +564,7 @@ function shareOnWhatsApp() {
       texto = texto.substring(0, 2000) + "...";
   }
 
-  const title = "Allora (re)Narrar — Seu Assistente de IA";
+  const title = "Allora (re)Narrar";
   const WHATSAPP_FOOTER = "\n\n🔮 Allora (re)Narrar — IA do Conhecimento\n⚡ Powered by Geraldo A. Seabra";
   const message = `✨ ${title}\n\n${texto}${WHATSAPP_FOOTER}`;
 
@@ -498,3 +586,5 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
+
