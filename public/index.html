@@ -112,52 +112,57 @@ color: white; font-size: 16px; transition: transform 0.2s ease;
 
 /* CSS HARMONIZADO PARA O GRUPO DE BOTÕES */
  /* CONTAINER */
+
 .grupo-botoes-sorteio {
   display: flex;
-  gap: 16px;
+  border-radius: 12px;
+  border: 2px solid #5f86e9;
+  gap: 12px;                 /* levemente reduzido */
   justify-content: center;
-  align-items: stretch;
+  align-items: flex-start;   /* remove esticamento vertical */
+  padding: 6px 10px;         /* mínimo necessário */
 }
 
 /* BOTÕES */
 .btn-sorteio {
   width: 150px;
-  height: 160px;
 
   background: transparent;
   border: none;
-  padding: 0;
+
+  padding: 4px 0;            /* mínimo vertical */
   margin: 0;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;  /* remove centralização vertical */
   align-items: center;
 
   cursor: pointer;
 }
 
-/* IMAGENS INDIVIDUAIS */
+/* IMAGENS */
 .icone-lunar {
   width: 100px;
-  height: 55px;
+  height: 75px;
   object-fit: contain;
   display: block;
 }
 
 .icone-todos {
   width: 100px;
-  height: 70px;
+  height: 55px;
   object-fit: contain;
   display: block;
 }
 
 /* LABEL */
 .label-botao {
-  margin-top: 8px;
+  margin-top: 4px;          /* reduzido de 8px */
+  margin-bottom: 0;         /* remove espaço inferior */
   font-size: 13px;
   font-weight: 600;
-  line-height: 1;
+  line-height: 1;           /* remove espaço extra invisível */
 }
   
   /* AREA DO JOGO*/
@@ -581,6 +586,7 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
 
 
