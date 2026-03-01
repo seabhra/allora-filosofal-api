@@ -208,6 +208,21 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
   margin-top: 0px;
   color: #444;
 }
+
+
+/* Botão Amarelo Aguarde um Instante */
+.amarelo-alerta { 
+    background: #ffc107; 
+    color: #333; 
+    cursor: default; 
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
+    70% { opacity: 0.8; box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
+    100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+}
   
 /* ÁREA DO JOGO */
 
@@ -320,8 +335,8 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 
 .btn-zap-redondo {
   position: absolute;
-  top: -12px;
-  right: -8px;
+  top: -22px;
+  right: -18px;
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -487,10 +502,10 @@ function sortear(modo) {
   
   shuffleAudio.play().catch(e => console.log("Interagir primeiro para tocar som"));
 
-  document.getElementById('status').innerText = "Sorteando combatentes...";
+  document.getElementById('status').innerText = "Sorteando combatentes... No Conclave das Metanarrativas, 62 filósofos atravessam mais de 2.500 anos de história do pensamento, enfrentando o julgo das paixões induzidas por plataformas com pouco controle civilitatório.";
   
   const areaBotao = document.getElementById('areaBotaoAcao');
-  areaBotao.innerHTML = `<button class="btn-aurora azul-info">Clássicos em combate...</button>`;
+  areaBotao.innerHTML = `<button class="btn-aurora azul-info">⚔️ Clássicos em combate...</button>`;
 
   const aiBox = document.getElementById('aiBox');
   if(aiBox.style.display === 'block') {
@@ -538,7 +553,9 @@ function sortear(modo) {
 
           document.getElementById('fotoLunar').src = srcL;
           document.getElementById('fotoSolar').src = srcS;
-          
+
+        
+          areaBotao.innerHTML = `<button class="btn-aurora amarelo-alerta">⏳Aguarde um instante...</button>`;
           gerarConfrontoIA();
       }
   }, 90);
@@ -549,7 +566,7 @@ async function gerarConfrontoIA() {
   const statusEl = document.getElementById('status');
   const tema = document.getElementById('seletorTema').value || "Existência";
 
-  statusEl.innerText = "Aguarde um instante... os filósofos sorteados travam um duelo jurássico em nome da verdade sem viés passional...";
+  statusEl.innerText = "Os filósofos sorteados travam um duelo jurássico em nome da verdade sem viés passional...";
 
   try {
       const promptTexto = `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`;
@@ -579,7 +596,7 @@ async function gerarConfrontoIA() {
 
       aiBox.innerHTML = `
         <h2 class="ai-title" style="color:#4a148c; margin-top:0; font-size:18px;">
-          <img src="public/imagens_app/logo_circular.png" class="ai-logo" style="width:25px; vertical-align:middle; margin-right:8px;">
+          <img src="public/imagens_app/logo_circular.png" class="ai-logo" style="width:35px; vertical-align:middle; margin-right:8px;">
           Allora Assistente de IA
         </h2>
         
@@ -624,7 +641,7 @@ async function gerarConfrontoIA() {
 
       document.getElementById('areaBotaoAcao').innerHTML = `
         <button onclick="location.reload()" class="btn-aurora verde">
-          ♻️ Novo Combate de Titãs
+          ♻️ Bora Pautar Um Nova Ordem
         </button>
       `;
 
@@ -682,6 +699,7 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
 
 
