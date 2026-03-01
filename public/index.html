@@ -152,42 +152,55 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 .verde { background: #f6b2c8; color: #1a1a1a; }
 
 /* GRUPO SORTEIO */
-/* Botão */
-.btn-sorteio {
-  width: 150px;
-  height: 95px; /* aumenta um pouco para dar espaço à label */
-  background: transparent;
-  border: none;
-  padding: 6px 0;
-  margin: 0;
+/* GRUPO SORTEIO */
+.grupo-botoes-sorteio {
   display: flex;
-  flex-direction: column;
+  border-radius: 12px;
+  border: 4px solid #5f86e9;
+  background-color: #e0e0e0;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 16px;
+}
+
+/* Botão horizontal */
+.btn-sorteio {
+  display: flex;
+  flex-direction: row; /* horizontal */
   align-items: center;
   justify-content: center;
+  gap: 8px; /* espaço entre ícone e texto */
+  background: transparent;
+  border: none;
   cursor: pointer;
+  padding: 6px 10px;
 }
 
 /* Ícones padronizados */
 .icone-lunar,
 .icone-todos {
-  width: 100px;      /* mesmo tamanho para ambos */
-  height: 50px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
-  display: block;
-  margin-bottom: 6px; /* respiro antes da label */
 }
 
 /* Label */
 .label-botao {
-  margin: 0;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 1.2;
-  text-align: center;
   color: #333;
+  line-height: 1;
+  margin: 0;
+  white-space: nowrap;
 }
-
-
+.texto-escolha { 
+  text-align: center; 
+  font-size: 16px; font-weight: 600;
+  margin-bottom: 5px;
+  margin-top: 5px; 
+  color: #444; 
+}  
 /* Botão Amarelo Aguarde um Instante */
 .amarelo-alerta { 
     background: #ffc107; 
@@ -669,6 +682,7 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
 
 
