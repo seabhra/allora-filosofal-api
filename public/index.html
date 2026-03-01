@@ -179,7 +179,7 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
 .icone-lunar {
-  width: 110px;
+  width: 120px;
   height: 60px;
   object-fit: contain;
   display: block;
@@ -187,8 +187,8 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
 .icone-todos {
-  width: 100px;
-  height: 50px;
+  width: 120px;
+  height: 60px;
   object-fit: contain;
   display: block;
   margin-bottom: 2px;
@@ -205,8 +205,8 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
   text-align: center;
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 0px;
-  margin-top: 0px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   color: #444;
 }
 
@@ -265,7 +265,17 @@ color: #fff; font-size: 10px; padding: 2px; font-weight: bold;
 white-space: nowrap;
 }
 
-  
+ /* Nome Lunar */
+.nomeLunar {
+  margin-top: 5px;     /* margem superior */
+  margin-bottom: 5px;   /* margem inferior */
+}
+
+/* Nome Solar */
+.nomeSolar {
+  margin-top: 5px;     /* margem superior */
+  margin-bottom: 5px;   /* margem inferior */
+} 
 .nome-filosofo {
   background: #638da3;
   color: white;
@@ -284,7 +294,7 @@ white-space: nowrap;
 /* STATUS */
 
 #status {
-  margin-top: 5px;     /* margem superior */
+  margin-top: -2px;     /* margem superior */
   margin-bottom: 5px;   /* margem inferior */
   margin-left: auto;    /* mantém centralizado */
   margin-right: auto;   /* mantém centralizado */
@@ -317,8 +327,8 @@ white-space: nowrap;
 
 .btn-zap-redondo {
   position: absolute;
-  top: 20px;
-  right: 15px;
+  top: 18px;
+  right: 12px;
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -371,7 +381,8 @@ white-space: nowrap;
             <div id="nomeLunar" class="nome-filosofo">Aguardando...</div>
         </div>
         <img src="imagens_app/verusX.png" class="img-versus-central">
-        <div class="card-container">
+        
+      <div class="card-container">
             <div class="card">
                 <img id="fotoSolar" src="imagens_app/solares.png">
                 <div id="labelCardDireita" class="label-card">Solares: prometem!</div>
@@ -389,12 +400,12 @@ white-space: nowrap;
 
     <button class="btn-sorteio btn-lunar" onclick="sortearLunarSolar()">
       <img src="/public/imagens_app/btn_uns.png" alt="Lunar/Solar" class="icone-lunar">
-      <span class="label-botao">Lunares/Solares</span>
+      <span class="label-botao">Lunares x Solares</span>
     </button>
 
     <button class="btn-sorteio btn-todos" onclick="sortearTodos()">
       <img src="/public/imagens_app/btn_todos.png" alt="Todos" class="icone-todos">
-      <span class="label-botao">Todos/Todos</span>
+      <span class="label-botao">Todos x Todos</span>
     </button>
 
   </div>
@@ -681,6 +692,7 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
 
 
