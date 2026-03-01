@@ -149,20 +149,21 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 .roxo { background: #98df4c; color: #1a1a1a; }
 .rosa { background: #f49bb9; color: #1a1a1a; }
 .azul-info { background: #4caedf; cursor: default; color: white; }
-.verde { background: #f47ebd; color: #1a1a1a; }
+.verde { background: #f6b2c8; color: #1a1a1a; }
 
 /* GRUPO SORTEIO */
 
 .grupo-botoes-sorteio {
   display: flex;
   border-radius: 12px;
-  border: 2px solid #5f86e9;
+  border: 4px solid #5f86e9;
+  background-color: #e0e0e0; /* fundo cinza */
   gap: 10px;
   justify-content: center;
   align-items: center;
   padding: 6px;
-  margin-top: 5px;     /* margem superior */
-  margin-bottom: 5px; /* margem inferior */
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 .btn-sorteio {
   width: 140px;
@@ -178,7 +179,7 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
 .icone-lunar {
-  width: 100px;
+  width: 110px;
   height: 60px;
   object-fit: contain;
   display: block;
@@ -186,7 +187,7 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
 .icone-todos {
-  width: 90px;
+  width: 100px;
   height: 50px;
   object-fit: contain;
   display: block;
@@ -239,8 +240,9 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
   display: none;
   justify-content: center;
   gap: 6px;
-  margin: 6px auto 12px;
-  padding: 6px;
+   margin-top: 5px;     /* margem superior */
+  margin-bottom: 5px;   /* margem inferior */
+   padding: 6px;
   background: rgba(255,255,255,0.2);
   border-radius: 18px;
   flex-wrap: nowrap;
@@ -265,8 +267,7 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.45);
   position: relative;
-  margin-top: 5px;     /* margem superior */
-  margin-bottom: 5px;   /* margem inferior */
+ margin: 5px auto;
 }
 
 .card img {
@@ -704,6 +705,7 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
 
 
