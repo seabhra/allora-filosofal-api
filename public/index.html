@@ -161,9 +161,9 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
   justify-content: center;
   align-items: center;
   padding: 6px;
-  margin: 4px 0;
+  margin-top: 5px;     /* margem superior */
+  margin-bottom: 5px; /* margem inferior */
 }
-
 .btn-sorteio {
   width: 140px;
   height: 70px;
@@ -277,7 +277,8 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 
 .label-card {
   position: absolute;
-  top: 0;
+   margin-top: 5px;     /* margem superior */
+  margin-bottom: 5px; /* margem inferior */
   width: 100%;
   background: rgba(0,0,0,0.7);
   color: #fff;
@@ -335,8 +336,8 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 
 .btn-zap-redondo {
   position: absolute;
-  top: -22px;
-  right: -18px;
+  top: 22px;
+  right: 18px;
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -386,7 +387,7 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
                 <img id="fotoLunar" src="imagens_app/lunares.png">
                 <div id="labelCardEsquerda" class="label-card">Lunares: desconfiam!</div>
             </div>
-            <div id="nomeLunar" class="nome-filosofo">Prontos para duelar...</div>
+            <div id="nomeLunar" class="nome-filosofo">Aguardando...</div>
         </div>
         <img src="imagens_app/verusX.png" class="img-versus-central">
         <div class="card-container">
@@ -394,7 +395,7 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
                 <img id="fotoSolar" src="imagens_app/solares.png">
                 <div id="labelCardDireita" class="label-card">Solares: prometem!</div>
             </div>
-            <div id="nomeSolar" class="nome-filosofo">Prontos para duelar...</div>
+            <div id="nomeSolar" class="nome-filosofo">Aguardando...</div>
         </div>
     </div>
 
@@ -566,7 +567,7 @@ async function gerarConfrontoIA() {
   const statusEl = document.getElementById('status');
   const tema = document.getElementById('seletorTema').value || "Existência";
 
-  statusEl.innerText = "Os filósofos sorteados travam um duelo jurássico em nome da verdade sem viés passional...";
+  statusEl.innerText = "Os filósofos sorteados travam agora um duelo jurássico em nome da metaverdade sem viés passional...";
 
   try {
       const promptTexto = `Promova um duelo de ideias sem viés passional entre ${lunarSorteado} e ${solarSorteado} sobre o tema: ${tema}.`;
@@ -628,10 +629,10 @@ async function gerarConfrontoIA() {
       `;
 
       aiBox.style.display = 'block';
-      statusEl.innerText = "O grande duelo foi concluído.";
+      statusEl.innerText = "Concluído o grande duelo de metanarrativas.";
       statusEl.style.textAlign = "center";
       statusEl.style.color = "#00cc66";
-      statusEl.style.fontWeight = "500";
+      statusEl.style.fontWeight = "700";
 
       try {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -641,7 +642,7 @@ async function gerarConfrontoIA() {
 
       document.getElementById('areaBotaoAcao').innerHTML = `
         <button onclick="location.reload()" class="btn-aurora verde">
-          ♻️ Bora Pautar Um Nova Ordem
+          ♻️ Pautar Nova Ordem Civilizatória
         </button>
       `;
 
@@ -699,6 +700,7 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
 
 
