@@ -149,7 +149,7 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 .roxo { background: #98df4c; color: #1a1a1a; }
 .rosa { background: #f49bb9; color: #1a1a1a; }
 .azul-info { background: #4caedf; cursor: default; color: white; }
-.verde { background: #5ae9e9; color: #1a1a1a; }
+.verde { background: #f47ebd; color: #1a1a1a; }
 
 /* GRUPO SORTEIO */
 
@@ -265,7 +265,8 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.45);
   position: relative;
-  margin-bottom: 4px;
+  margin-top: 5px;     /* margem superior */
+  margin-bottom: 5px;   /* margem inferior */
 }
 
 .card img {
@@ -306,7 +307,10 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 /* STATUS */
 
 #status {
-  margin: 8px auto;
+  margin-top: 5px;     /* margem superior */
+  margin-bottom: 5px;   /* margem inferior */
+  margin-left: auto;    /* mantém centralizado */
+  margin-right: auto;   /* mantém centralizado */
   font-size: 13px;
   color: #555;
   background: rgba(255,255,255,0.9);
@@ -336,8 +340,8 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 
 .btn-zap-redondo {
   position: absolute;
-  top: 22px;
-  right: 18px;
+  top: 20px;
+  right: 15px;
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -506,7 +510,7 @@ function sortear(modo) {
   document.getElementById('status').innerText = "Sorteando combatentes... No Conclave das Metanarrativas, 62 filósofos atravessam mais de 2.500 anos de história do pensamento, enfrentando o julgo das paixões induzidas por plataformas com pouco controle civilitatório.";
   
   const areaBotao = document.getElementById('areaBotaoAcao');
-  areaBotao.innerHTML = `<button class="btn-aurora azul-info">⚔️ Clássicos em combate...</button>`;
+  areaBotao.innerHTML = `<button class="btn-aurora azul-info">🛠️ Titãs do Pensamento em Combate...</button>`;
 
   const aiBox = document.getElementById('aiBox');
   if(aiBox.style.display === 'block') {
@@ -700,6 +704,7 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
 
 
