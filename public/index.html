@@ -400,7 +400,7 @@ white-space: nowrap;
   </div>
 </div>
 
-    <div id="status">Prepara-se... Em jogo a grande batalha do pensamento humano sem viés passional. Agora é a hora de exorcizar seus fantasmas narrativos que as redes lhe impuseram — e que você ainda assume como seus. Jogue sem dó e mate o que está te matando: a mentira intencional por mais poder político, econômico e religioso. Quando jogar também é ler.</div>
+    <div id="status">Prepara-se... Em jogo a grande batalha do pensamento de alto nível sem viés passional.</div>
 
     <!-- CAIXA DE RESULTADO E ANÚNCIO -->
     <div id="aiBox">
@@ -484,7 +484,7 @@ function sortear(modo) {
   
   shuffleAudio.play().catch(e => console.log("Interagir primeiro para tocar som"));
 
-  document.getElementById('status').innerText = "Sorteando combatentes... No Conclave das Metanarrativas, 62 filósofos atravessam mais de 2.500 anos de história do pensamento, enfrentando o julgo das paixões induzidas por plataformas com pouco controle civilitatório.";
+  document.getElementById('status').innerText = "Sorteando combatentes... No Conclave das Metanarrativas, 62 filósofos atravessam mais de 2.500 anos de pensamento para enfrentar paixões induzidas por plataformas sem controle civilizatório. É hora de exorcizar fantasmas narrativos impostos pelas redes. Jogue sem dó e elimine o que te corrói: a mentira deliberada por poder político, econômico e religioso.";
   
   const areaBotao = document.getElementById('areaBotaoAcao');
   areaBotao.innerHTML = `<button class="btn-aurora azul-info">🛠️ Titãs do Pensamento em Combate...</button>`;
@@ -504,8 +504,8 @@ function sortear(modo) {
       if (modo === 'todos') {
           tempL = todosFilosofos[Math.floor(Math.random() * todosFilosofos.length)];
           tempS = todosFilosofos[Math.floor(Math.random() * todosFilosofos.length)];
-          labelEsq = "Universo Filosófico";
-          labelDir = "Universo Filosófico";
+          labelEsq = "Lunares/Solares";
+          labelDir = "Lunares/Solares";
       } else {
           tempL = filosofosLunares[Math.floor(Math.random() * filosofosLunares.length)];
           tempS = filosofosSolares[Math.floor(Math.random() * filosofosSolares.length)];
@@ -623,7 +623,7 @@ async function gerarConfrontoIA() {
 
       document.getElementById('areaBotaoAcao').innerHTML = `
         <button onclick="location.reload()" class="btn-aurora verde">
-          ♻️ Paute Novo Status Civilizatório
+          ♻️ Paute Nova Agenda
         </button>
       `;
 
@@ -681,6 +681,7 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
 
 
