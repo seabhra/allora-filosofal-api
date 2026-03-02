@@ -164,23 +164,20 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
   padding: 5px 5px;
 }
 
-/* Animação de pulsar os dois botões */
-@keyframes pulsar {
+  /* Pulsação estilo alerta (onda expansiva) */
+@keyframes pulse-botao {
   0% {
-    transform: scale(1);
-    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6);
   }
-  50% {
-    transform: scale(1.06);
-    opacity: 0.9;
+  70% {
+    box-shadow: 0 0 0 12px rgba(255, 255, 255, 0);
   }
   100% {
-    transform: scale(1);
-    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
   }
 }
 
-/* Aplica a animação aos botões */
+/* Aplica a animação nos dois botões */
 .btn-sorteio {
   display: flex;
   flex-direction: column;
@@ -191,18 +188,11 @@ box-shadow: 0 10px 25px rgba(0,0,0,0.4);
   cursor: pointer;
   padding: 6px 4px;
   width: 150px;
+  border-radius: 12px; /* importante para a onda acompanhar o formato */
 
-  animation: pulsar 1.8s ease-in-out infinite;
-  transition: transform 0.2s ease;
+  animation: pulse-botao 1.6s infinite;
 }
-
-/* Para parar de pulsar quando passar o mouse */
-.btn-sorteio:hover {
-  animation: none;
-  transform: scale(1.05);
-}
-
-/* Ícones */
+  /* Ícones */
 .icone-lunar,
 .icone-todos {
   width: 150px;
@@ -705,6 +695,7 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
 
 
